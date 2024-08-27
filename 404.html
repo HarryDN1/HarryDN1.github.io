@@ -188,13 +188,10 @@
             const qrCodeElement = document.getElementById('qrCode');
             const textContainer = document.getElementById('textContainer');
 
-            if (qrCodeElement.style.display === 'none' || qrCodeElement.style.display === '') {
-                qrCodeElement.style.display = 'block';
-                textContainer.style.display = 'none';
-            } else {
-                qrCodeElement.style.display = 'none';
-                textContainer.style.display = 'block';
-            }
+            const isQRCodeVisible = qrCodeElement.style.display !== 'none';
+            
+            qrCodeElement.style.display = isQRCodeVisible ? 'none' : 'block';
+            textContainer.style.display = isQRCodeVisible ? 'block' : 'none';
         }
     </script>
 
