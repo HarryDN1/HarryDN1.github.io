@@ -23,8 +23,8 @@
 
         #fullscreenButton {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 20px;
+            left: 20px;
             background: none;
             border: none;
             color: white;
@@ -44,7 +44,7 @@
         }
 
         #scriptLocation {
-            color: #1E90FF;
+            color: #ff1efb;
         }
 
         #shootLocation {
@@ -98,9 +98,18 @@
         const icon = fullscreenButton.querySelector('i');
 
         fullscreenButton.addEventListener('click', () => {
-            if (screenfull.isEnabled) {
-                screenfull.toggle();
-                icon.className = screenfull.isFullscreen ? 'fas fa-compress' : 'fas fa-expand';
+            if (!document.fullscreenElement) {
+                // Enter fullscreen
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) { /* Firefox */
+                    document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) { /* Chrome, Safari, and Opera */
+                    document.documentElement.webkitRequestFullscreen();
+                } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
+                    document.documentElement.msRequestFullscreen();
+                }
+                icon.className = 'fas fa-compress'; // Switch to exit fullscreen icon
             } else {
                 alert("Fullscreen mode is not supported on this device.");
             }
