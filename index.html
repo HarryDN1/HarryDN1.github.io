@@ -6,16 +6,34 @@
     <title>Dynamic Text Display</title>
     <style>
         body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            color: white;
             font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        p {
+            font-size: 2rem;
+            margin: 0;
             text-align: center;
-            padding: 50px;
         }
     </style>
 </head>
 <body>
 
-    <h1>Dynamic Text Display</h1>
-    <p id="dynamicText">Loading...</p>
+    <div>
+        <h1>Dynamic Text Display</h1>
+        <p id="dynamicText">Loading...</p>
+    </div>
 
     <script>
         // Get the current URL
