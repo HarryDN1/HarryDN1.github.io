@@ -62,21 +62,20 @@
 
         #qrCode {
             margin: 0;
-            padding: 10vw;
-            width: 90vw;
+            width: 80vw;
             height: auto;
             display: none;
         }
 
         #qrCode img {
-            width: 80%;
+            width: 100%;
             height: auto;
         }
 
         #toggleButton {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
+            bottom: 5%;
+            left: 5%;
             background: transparent;
             border: none;
             cursor: pointer;
@@ -94,12 +93,21 @@
             }
 
             #qrCode {
-                width: 75vw;
+                width: 80vw;
                 max-width: none;
             }
 
             #toggleButton {
                 font-size: 2.2rem;
+                bottom: 5%;
+                left: 5%;
+            }
+        }
+
+        @media (orientation: landscape) {
+            #toggleButton {
+                bottom: 2%;
+                left: 2%;
             }
         }
     </style>
