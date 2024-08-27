@@ -14,24 +14,34 @@
             background-color: black;
             color: white;
             font-family: Arial, sans-serif;
+            text-align: center;
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 10vw;
             margin: 0;
         }
 
         p {
-            font-size: 2rem;
+            font-size: 5vw;
             margin: 0;
-            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 15vw;
+            }
+
+            p {
+                font-size: 8vw;
+            }
         }
     </style>
 </head>
 <body>
 
     <div>
-        <h1>Slate Info</h1>
+        <h1>Dynamic Text Display</h1>
         <p id="dynamicText">Loading...</p>
     </div>
 
@@ -50,9 +60,8 @@
             displayText += `?${query}`;
         }
 
-        // Default to "Home" if the path is empty
         if (!displayText) {
-            displayText = "Home";
+            displayText = "NO SLATE";
         }
 
         // Replace hyphens with spaces for better readability
