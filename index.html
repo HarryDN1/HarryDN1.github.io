@@ -18,23 +18,31 @@
         }
 
         h1 {
-            font-size: 10rem;
+            font-size: 10vw;
             margin: 0;
-            padding: 20px;
         }
 
         p {
-            font-size: 8rem;
+            font-size: 5vw;
             margin: 0;
-            padding: 20px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 15vw;
+            }
+
+            p {
+                font-size: 8vw;
+            }
         }
     </style>
 </head>
 <body>
 
     <div>
-        <h1>Welcome.</h1>
-        <p>Please enter your slate info in the URL to proceed.</p>
+        <h1>Welcome!</h1>
+        <p>Please enter a slate in the URL to proceed.</p>
     </div>
 
 </body>
