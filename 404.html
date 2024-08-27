@@ -19,26 +19,26 @@
         }
 
         #slate {
-            font-size: 20vw; /* Slightly larger than before */
+            font-size: 20vw; 
             margin: 0;
-            color: white; /* Set Slate text to white */
+            color: white; 
         }
 
         #scriptLocation, #shootLocation, #shootDate {
-            font-size: 4vw; /* Slightly smaller than before */
+            font-size: 4vw; 
             margin: 0;
         }
 
         #scriptLocation {
-            color: #1E90FF; /* Dodger Blue */
+            color: #1E90FF; 
         }
 
         #shootLocation {
-            color: #32CD32; /* Lime Green */
+            color: #32CD32; 
         }
 
         #shootDate {
-            color: #FFD700; /* Gold */
+            color: #FFD700;
         }
 
         #details {
@@ -51,6 +51,14 @@
 
         #qrCode {
             margin-top: 20px;
+            width: 30vw; /* Responsive width */
+            max-width: 300px; /* Maximum width */
+            height: auto;
+        }
+
+        #qrCode img {
+            width: 100%;
+            height: auto;
         }
 
         @media (max-width: 600px) {
@@ -64,6 +72,11 @@
 
             #details {
                 flex-direction: column; /* Stack vertically on small screens */
+            }
+
+            #qrCode {
+                width: 60vw; /* Adjust QR code width on mobile */
+                max-width: 200px; /* Maximum width on mobile */
             }
         }
     </style>
