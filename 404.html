@@ -196,7 +196,7 @@
         numberField.style.color = getColorForNumber(numberValue);
 
         function getColorForNumber(number) {
-            const min = 1000;
+            const min = 3000;
             const max = 7500;
             const percentage = (number - min) / (max - min);
             const colorValue = Math.min(Math.max(percentage * 255, 0), 255);
