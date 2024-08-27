@@ -19,13 +19,13 @@
         }
 
         #slate {
-            font-size: 20vw;
+            font-size: 20vw; /* Slightly larger than before */
             margin: 0;
             color: white; /* Set Slate text to white */
         }
 
         #scriptLocation, #shootLocation, #shootDate {
-            font-size: 4vw; 
+            font-size: 4vw; /* Slightly smaller than before */
             margin: 0;
         }
 
@@ -46,6 +46,10 @@
             justify-content: center;
             align-items: center;
             gap: 20px; /* Space between the text fields */
+            margin-top: 20px;
+        }
+
+        #qrCode {
             margin-top: 20px;
         }
 
@@ -73,6 +77,9 @@
             <p id="shootLocation"></p>
             <p id="shootDate"></p>
         </div>
+        <div id="qrCode">
+            <img id="qrCodeImage" alt="QR Code" />
+        </div>
     </div>
 
     <script>
@@ -95,6 +102,11 @@
 
         // Hide the #details container if there are no additional fields
         document.getElementById('details').style.display = parts.length > 1 ? 'flex' : 'none';
+
+        // Generate the QR code
+        const qrText = encodeURIComponent(url.href); // Encode the URL for the QR code
+        const qrCodeUrl = `https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=${qrText}`;
+        document.getElementById('qrCodeImage').src = qrCodeUrl;
     </script>
 
 </body>
