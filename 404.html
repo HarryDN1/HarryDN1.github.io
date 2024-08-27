@@ -25,7 +25,7 @@
             color: white;
         }
 
-        #scriptLocation, #shootLocation, #shootDate {
+        #scriptLocation, #shootLocation, #shootDate, #numberField {
             font-size: 4vw;
             margin: 0;
         }
@@ -44,11 +44,11 @@
 
         #numberField {
             margin-top: 20px;
-            font-size: 4vw;
         }
 
         #details {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             gap: 20px;
@@ -56,9 +56,9 @@
         }
 
         #qrCode {
-            margin-top: 20px;
-            width: 55vw;
-            max-width: 600px;
+            margin: 0;
+            padding: 0;
+            width: 90vw;
             height: auto;
             display: none;
         }
@@ -89,8 +89,8 @@
             }
 
             #qrCode {
-                width: 60vw;
-                max-width: 200px;
+                width: 95vw;
+                max-width: none;
             }
 
             #toggleButton {
@@ -106,11 +106,13 @@
     <div id="textContainer">
         <p id="slate">Loading...</p>
         <div id="details">
-            <p id="scriptLocation"></p>
-            <p id="shootLocation"></p>
-            <p id="shootDate"></p>
+            <div id="rowDetails">
+                <p id="scriptLocation"></p>
+                <p id="shootLocation"></p>
+                <p id="shootDate"></p>
+            </div>
+            <p id="numberField"></p>
         </div>
-        <p id="numberField"></p>
     </div>
     <div id="qrCode">
         <img id="qrCodeImage" alt="QR Code" />
@@ -123,8 +125,8 @@
         // Extract the path from the URL
         const path = url.pathname.substring(1); // Remove the leading '/'
 
-        // Split the path by dashes
-        const parts = path.split('-');
+        // Split the path by "&&"
+        const parts = path.split('&&');
 
         // Display the Slate text
         document.getElementById('slate').textContent = parts[0]?.replace(/-/g, ' ') || "NO SLATE";
@@ -134,23 +136,20 @@
         document.getElementById('shootLocation').textContent = parts[2]?.replace(/-/g, ' ') || "";
         document.getElementById('shootDate').textContent = parts[3]?.replace(/-/g, ' ') || "";
 
-        // Display the number field, add "K", and calculate its color
+        // Display the number field, append "K", and calculate its color
         const numberField = document.getElementById('numberField');
         const numberValue = parseInt(parts[4]) || 0;
 
-        numberField.textContent = `${numberValue}K`;
+        numberField.textContent = numberValue + 'K';
         numberField.style.color = getColorForNumber(numberValue);
 
         function getColorForNumber(number) {
-            // Map number from 1000 (deep red) to 7500 (white)
             const min = 1000;
             const max = 7500;
             const percentage = (number - min) / (max - min);
-            const redValue = 255;
-            const greenBlueValue = Math.min(Math.max(percentage * 255, 0), 255);
+            const colorValue = Math.min(Math.max(percentage * 255, 0), 255);
 
-            // Return color as RGB string, interpolating between deep red and white
-            return `rgb(${redValue}, ${greenBlueValue}, ${greenBlueValue})`;
+            return `rgb(${255}, ${colorValue}, ${colorValue})`;
         }
 
         // Hide the #details container if there are no additional fields
