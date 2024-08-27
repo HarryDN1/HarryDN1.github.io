@@ -144,7 +144,7 @@
         function getColorForNumber(number) {
             // Map number from 1000 to 10000 to a range from 0 to 255
             const min = 1000;
-            const max = 10000;
+            const max = 8000;
             const percentage = (number - min) / (max - min);
             const colorValue = Math.min(Math.max(percentage * 255, 0), 255);
 
