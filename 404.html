@@ -46,6 +46,12 @@
             margin-top: 20px;
         }
 
+        #extraField {
+            font-size: 2vw;
+            margin-top: 10px;
+            color: rgba(255, 255, 255, 0.4); /* 40% grey */
+        }
+
         #details {
             display: flex;
             flex-direction: column;
@@ -62,20 +68,20 @@
 
         #qrCode {
             margin: 0;
-            width: 80vw;
+            padding: 15vw;
+            width: 60vw;
             height: auto;
             display: none;
         }
 
         #qrCode img {
-            width: 100%;
+            width: 70%;
             height: auto;
         }
 
         #toggleButton {
-            position: absolute;
-            bottom: 5%;
-            left: 5%;
+            bottom: 3%;
+            left: 3%;
             background: transparent;
             border: none;
             cursor: pointer;
@@ -92,22 +98,17 @@
                 font-size: 6vw;
             }
 
+            #extraField {
+                font-size: 3vw;
+            }
+
             #qrCode {
-                width: 80vw;
+                width: 60vw;
                 max-width: none;
             }
 
             #toggleButton {
                 font-size: 2.2rem;
-                bottom: 5%;
-                left: 5%;
-            }
-        }
-
-        @media (orientation: landscape) {
-            #toggleButton {
-                bottom: 2%;
-                left: 2%;
             }
         }
     </style>
@@ -125,6 +126,7 @@
                 <p id="shootDate"></p>
             </div>
             <p id="numberField"></p>
+            <p id="extraField"></p>
         </div>
     </div>
     <div id="qrCode">
@@ -164,6 +166,9 @@
 
             return `rgb(${255}, ${colorValue}, ${colorValue})`;
         }
+
+        // Display the extra field if it exists
+        document.getElementById('extraField').textContent = parts[5]?.replace(/-/g, ' ') || "";
 
         // Hide the #details container if there are no additional fields
         document.getElementById('details').style.display = parts.length > 1 ? 'flex' : 'none';
