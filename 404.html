@@ -134,23 +134,23 @@
         document.getElementById('shootLocation').textContent = parts[2]?.replace(/-/g, ' ') || "";
         document.getElementById('shootDate').textContent = parts[3]?.replace(/-/g, ' ') || "";
 
-        // Display the number field and calculate its color
+        // Display the number field, add "K", and calculate its color
         const numberField = document.getElementById('numberField');
         const numberValue = parseInt(parts[4]) || 0;
 
-        numberField.textContent = numberValue;
+        numberField.textContent = `${numberValue}K`;
         numberField.style.color = getColorForNumber(numberValue);
 
         function getColorForNumber(number) {
-            // Map number from 1000 (red) to 7500 (light blue)
+            // Map number from 1000 (deep red) to 7500 (white)
             const min = 1000;
             const max = 7500;
             const percentage = (number - min) / (max - min);
-            const redValue = Math.min(Math.max(255 - percentage * 255, 0), 255);
-            const blueValue = Math.min(Math.max(percentage * 255, 0), 255);
+            const redValue = 255;
+            const greenBlueValue = Math.min(Math.max(percentage * 255, 0), 255);
 
-            // Return color as RGB string
-            return `rgb(${redValue}, 0, ${blueValue})`;
+            // Return color as RGB string, interpolating between deep red and white
+            return `rgb(${redValue}, ${greenBlueValue}, ${greenBlueValue})`;
         }
 
         // Hide the #details container if there are no additional fields
