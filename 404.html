@@ -16,6 +16,7 @@
             color: white;
             font-family: Arial, sans-serif;
             text-align: center;
+            position: relative; /* For positioning the toggle button */
         }
 
         #slate {
@@ -54,11 +55,23 @@
             width: 30vw; /* Responsive width */
             max-width: 300px; /* Maximum width */
             height: auto;
+            display: none; /* Hide by default */
         }
 
         #qrCode img {
             width: 100%;
             height: auto;
+        }
+
+        #toggleButton {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-size: 2rem; /* Adjust size of icon */
         }
 
         @media (max-width: 600px) {
@@ -78,21 +91,27 @@
                 width: 60vw; /* Adjust QR code width on mobile */
                 max-width: 200px; /* Maximum width on mobile */
             }
+
+            #toggleButton {
+                font-size: 1.5rem; /* Adjust size of icon on mobile */
+            }
         }
     </style>
 </head>
 <body>
 
-    <div>
+    <button id="toggleButton" onclick="toggleQRCode()">🔄</button> <!-- Toggle button -->
+
+    <div id="textContainer">
         <p id="slate">Loading...</p>
         <div id="details">
             <p id="scriptLocation"></p>
             <p id="shootLocation"></p>
             <p id="shootDate"></p>
         </div>
-        <div id="qrCode">
-            <img id="qrCodeImage" alt="QR Code" />
-        </div>
+    </div>
+    <div id="qrCode">
+        <img id="qrCodeImage" alt="QR Code" />
     </div>
 
     <script>
@@ -120,6 +139,20 @@
         const qrText = encodeURIComponent(url.href); // Encode the URL for the QR code
         const qrCodeUrl = `https://api.qr-code-generator.com/v1/create?access-token=Njhb8hlij4haCKqSFFCSIroT5BZX_HHWU6yns0qFmJI8v8EGV30Qcm01Vb3d1LR9&qr_code_text=${qrText}`;
         document.getElementById('qrCodeImage').src = qrCodeUrl;
+
+        // Function to toggle QR code visibility
+        function toggleQRCode() {
+            const qrCodeElement = document.getElementById('qrCode');
+            const textContainer = document.getElementById('textContainer');
+
+            if (qrCodeElement.style.display === 'none') {
+                qrCodeElement.style.display = 'block';
+                textContainer.style.display = 'none';
+            } else {
+                qrCodeElement.style.display = 'none';
+                textContainer.style.display = 'block';
+            }
+        }
     </script>
 
 </body>
