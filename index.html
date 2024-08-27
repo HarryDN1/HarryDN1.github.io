@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Text Display</title>
+    <title>Enter a Slate</title>
     <style>
         body {
             margin: 0;
@@ -14,53 +14,28 @@
             background-color: black;
             color: white;
             font-family: Arial, sans-serif;
+            text-align: center;
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 4rem;
             margin: 0;
+            padding: 20px;
         }
 
         p {
             font-size: 2rem;
             margin: 0;
-            text-align: center;
+            padding: 20px;
         }
     </style>
 </head>
 <body>
 
     <div>
-        <h1>Dynamic Text Display</h1>
-        <p id="dynamicText">Loading...</p>
+        <h1>Welcome.</h1>
+        <p>Please enter your slate info in the URL to proceed.</p>
     </div>
-
-    <script>
-        // Get the current URL
-        const url = new URL(window.location.href);
-
-        // Extract the path and query string from the URL
-        const path = url.pathname.substring(1); // Remove the leading '/'
-        const query = url.searchParams.toString(); // Get query parameters as a string
-
-        // Combine path and query string
-        let displayText = path;
-
-        if (query) {
-            displayText += `?${query}`;
-        }
-
-        // Default to "Home" if the path is empty
-        if (!displayText) {
-            displayText = "Home";
-        }
-
-        // Replace hyphens with spaces for better readability
-        displayText = displayText.replace(/-/g, ' ');
-
-        // Set the text content of the paragraph element
-        document.getElementById('dynamicText').textContent = displayText;
-    </script>
 
 </body>
 </html>
