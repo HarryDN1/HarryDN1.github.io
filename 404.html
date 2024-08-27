@@ -4,38 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slate</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/screenfull.js/5.1.0/screenfull.min.js"></script>
     <style>
         body {
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
+            flex-direction: column; /* Align items vertically */
             height: 100vh;
             background-color: black;
             color: white;
             font-family: Arial, sans-serif;
             text-align: center;
-            position: relative;
-        }
-
-        #fullscreenButton {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
         }
 
         #slate {
             font-size: 15vw;
             margin: 0;
-            color: #FF6347;
+            color: #ffffff; 
         }
 
         #scriptLocation, #shootLocation, #shootDate {
@@ -44,11 +30,11 @@
         }
 
         #scriptLocation {
-            color: #ff1efb;
+            color: #1E90FF; 
         }
 
         #shootLocation {
-            color: #32CD32;
+            color: #32CD32; 
         }
 
         #shootDate {
@@ -59,7 +45,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 20px; /* Space between the text fields */
             margin-top: 20px;
         }
 
@@ -73,16 +59,12 @@
             }
 
             #details {
-                flex-direction: column;
+                flex-direction: column; /* Stack vertically on small screens */
             }
         }
     </style>
 </head>
 <body>
-
-    <button id="fullscreenButton">
-        <i class="fas fa-expand"></i>
-    </button>
 
     <div>
         <p id="slate">Loading...</p>
@@ -94,36 +76,11 @@
     </div>
 
     <script>
-        const fullscreenButton = document.getElementById('fullscreenButton');
-        const icon = fullscreenButton.querySelector('i');
-
-        fullscreenButton.addEventListener('click', () => {
-            if (!document.fullscreenElement) {
-                // Enter fullscreen
-                if (document.documentElement.requestFullscreen) {
-                    document.documentElement.requestFullscreen();
-                } else if (document.documentElement.mozRequestFullScreen) { /* Firefox */
-                    document.documentElement.mozRequestFullScreen();
-                } else if (document.documentElement.webkitRequestFullscreen) { /* Chrome, Safari, and Opera */
-                    document.documentElement.webkitRequestFullscreen();
-                } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
-                    document.documentElement.msRequestFullscreen();
-                }
-                icon.className = 'fas fa-compress'; // Switch to exit fullscreen icon
-            } else {
-                alert("Fullscreen mode is not supported on this device.");
-            }
-        });
-
-        screenfull.on('change', () => {
-            icon.className = screenfull.isFullscreen ? 'fas fa-compress' : 'fas fa-expand';
-        });
-
         // Get the current URL
         const url = new URL(window.location.href);
 
         // Extract the path from the URL
-        const path = url.pathname.substring(1);
+        const path = url.pathname.substring(1); // Remove the leading '/'
 
         // Split the path by underscores
         const parts = path.split('_');
