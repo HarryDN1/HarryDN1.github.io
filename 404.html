@@ -22,8 +22,8 @@
 
         #fullscreenButton {
             position: absolute;
-            top: 20px;
-            left: 20px;
+            top: 10px;
+            left: 10px;
             background: none;
             border: none;
             color: white;
@@ -43,7 +43,7 @@
         }
 
         #scriptLocation {
-            color: #ff1efb;
+            color: #1E90FF; /* Dodger Blue */
         }
 
         #shootLocation {
@@ -97,7 +97,7 @@
         const icon = fullscreenButton.querySelector('i');
 
         fullscreenButton.addEventListener('click', () => {
-            if (!document.fullscreenElement) {
+            if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement && !document.msFullscreenElement) {
                 // Enter fullscreen
                 if (document.documentElement.requestFullscreen) {
                     document.documentElement.requestFullscreen();
