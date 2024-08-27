@@ -25,7 +25,7 @@
             color: white;
         }
 
-        #scriptLocation, #shootLocation, #shootDate, #numberField {
+        #scriptLocation, #shootLocation, #shootDate {
             font-size: 4vw;
             margin: 0;
         }
@@ -44,11 +44,11 @@
 
         #numberField {
             margin-top: 20px;
+            font-size: 4vw;
         }
 
         #details {
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             gap: 20px;
@@ -109,8 +109,8 @@
             <p id="scriptLocation"></p>
             <p id="shootLocation"></p>
             <p id="shootDate"></p>
-            <p id="numberField"></p>
         </div>
+        <p id="numberField"></p>
     </div>
     <div id="qrCode">
         <img id="qrCodeImage" alt="QR Code" />
@@ -123,8 +123,8 @@
         // Extract the path from the URL
         const path = url.pathname.substring(1); // Remove the leading '/'
 
-        // Split the path by underscores
-        const parts = path.split('_');
+        // Split the path by dashes
+        const parts = path.split('-');
 
         // Display the Slate text
         document.getElementById('slate').textContent = parts[0]?.replace(/-/g, ' ') || "NO SLATE";
@@ -142,14 +142,15 @@
         numberField.style.color = getColorForNumber(numberValue);
 
         function getColorForNumber(number) {
-            // Map number from 1000 to 10000 to a range from 0 to 255
+            // Map number from 1000 (red) to 7500 (light blue)
             const min = 1000;
-            const max = 8000;
+            const max = 7500;
             const percentage = (number - min) / (max - min);
-            const colorValue = Math.min(Math.max(percentage * 255, 0), 255);
+            const redValue = Math.min(Math.max(255 - percentage * 255, 0), 255);
+            const blueValue = Math.min(Math.max(percentage * 255, 0), 255);
 
-            // Return color as RGB string, interpolating between deep orange and white
-            return `rgb(${255}, ${colorValue}, ${0})`;
+            // Return color as RGB string
+            return `rgb(${redValue}, 0, ${blueValue})`;
         }
 
         // Hide the #details container if there are no additional fields
