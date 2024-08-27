@@ -124,6 +124,20 @@
             }
         });
 
+        // Update the icon when entering or exiting fullscreen mode
+        document.addEventListener('fullscreenchange', updateIcon);
+        document.addEventListener('webkitfullscreenchange', updateIcon);
+        document.addEventListener('mozfullscreenchange', updateIcon);
+        document.addEventListener('msfullscreenchange', updateIcon);
+
+        function updateIcon() {
+            if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+                icon.className = 'fas fa-compress';
+            } else {
+                icon.className = 'fas fa-expand';
+            }
+        }
+
         // Get the current URL
         const url = new URL(window.location.href);
 
