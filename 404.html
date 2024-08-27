@@ -20,13 +20,13 @@
         }
 
         #slate {
-            font-size: 5vw;
+            font-size: 20vw;
             margin: 0;
             color: white;
         }
 
         #scriptLocation, #shootLocation, #shootDate, #numberField {
-            font-size: 2vw;
+            font-size: 4vw;
             margin: 0;
         }
 
@@ -43,36 +43,44 @@
         }
 
         #numberField {
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
-        #uidField {
-            font-size: 1.5vw;
+        #extraField {
+            font-size: 2vw;
             margin-top: 10px;
             color: rgba(255, 255, 255, 0.4); /* 40% grey */
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
+        }
+
+        #details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
         }
 
         #rowDetails {
             display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 10px;
+            gap: 20px;
         }
 
         #qrCode {
             margin: 0;
+            padding: 10vw;
             width: 65vw;
             height: auto;
-            display: block;
+            display: block; /* Show QR code by default */
         }
 
         #qrCode img {
             width: 70%;
             height: auto;
+        }
+
+        #textContainer {
+            display: none; /* Hide text container by default */
         }
 
         #toggleButton {
@@ -86,21 +94,17 @@
             font-size: 5rem;
         }
 
-        #textContainer {
-            display: none;
-        }
-
         @media (max-width: 600px) {
             #slate {
-                font-size: 8vw;
+                font-size: 25vw;
             }
 
             #scriptLocation, #shootLocation, #shootDate, #numberField {
-                font-size: 3vw;
+                font-size: 6vw;
             }
 
-            #uidField {
-                font-size: 2vw;
+            #extraField {
+                font-size: 1.5vw;
             }
 
             #qrCode {
@@ -118,29 +122,20 @@
 
     <button id="toggleButton" onclick="toggleQRCode()">🔄</button>
 
-    <div id="qrCode">
-        <p id="slate">Loading...</p>
-        <img id="qrCodeImage" alt="QR Code" />
-        <div id="rowDetails">
-            <p id="scriptLocation"></p>
-            <p id="shootLocation"></p>
-            <p id="shootDate"></p>
-            <p id="numberField"></p>
-        </div>
-        <p id="uidField"></p>
-    </div>
-
     <div id="textContainer">
-        <p id="slateText">Loading...</p>
+        <p id="slate">Loading...</p>
         <div id="details">
-            <div id="rowDetailsText">
-                <p id="scriptLocationText"></p>
-                <p id="shootLocationText"></p>
-                <p id="shootDateText"></p>
+            <div id="rowDetails">
+                <p id="scriptLocation"></p>
+                <p id="shootLocation"></p>
+                <p id="shootDate"></p>
             </div>
-            <p id="numberFieldText"></p>
-            <p id="extraFieldText"></p>
+            <p id="numberField"></p>
+            <p id="extraField"></p>
         </div>
+    </div>
+    <div id="qrCode">
+        <img id="qrCodeImage" alt="QR Code" />
     </div>
 
     <script>
@@ -177,15 +172,18 @@
             return `rgb(${255}, ${colorValue}, ${colorValue})`;
         }
 
-        // Display the UID field
-        document.getElementById('uidField').textContent = parts[5]?.replace(/-/g, ' ') || "";
+        // Display the extra field if it exists
+        document.getElementById('extraField').textContent = parts[5]?.replace(/-/g, ' ') || "";
+
+        // Hide the #details container if there are no additional fields
+        document.getElementById('details').style.display = parts.length > 1 ? 'flex' : 'none';
 
         // Generate the QR code
         const qrText = encodeURIComponent(url.href);
         const qrCodeUrl = `https://api.qr-code-generator.com/v1/create?access-token=Njhb8hlij4haCKqSFFCSIroT5BZX_HHWU6yns0qFmJI8v8EGV30Qcm01Vb3d1LR9&qr_code_text=${qrText}`;
         document.getElementById('qrCodeImage').src = qrCodeUrl;
 
-        // Function to toggle QR code and text visibility
+        // Function to toggle QR code visibility
         function toggleQRCode() {
             const qrCodeElement = document.getElementById('qrCode');
             const textContainer = document.getElementById('textContainer');
