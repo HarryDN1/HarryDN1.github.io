@@ -18,23 +18,48 @@
             text-align: center;
         }
 
-        h1 {
-            font-size: 2vw;
+        #slate {
+            font-size: 15vw;
+            margin: 0;
+            color: #FF6347; /* Tomato */
+        }
+
+        #scriptLocation, #shootLocation, #shootDate {
+            font-size: 5vw;
             margin: 0;
         }
 
-        .slate-info {
-            font-size: 10vw;
-            margin: 5px 0;
+        #scriptLocation {
+            color: #1E90FF; /* Dodger Blue */
+        }
+
+        #shootLocation {
+            color: #32CD32; /* Lime Green */
+        }
+
+        #shootDate {
+            color: #FFD700; /* Gold */
+        }
+
+        #details {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* Space between the text fields */
+            margin-top: 20px;
         }
 
         @media (max-width: 600px) {
-            h1 {
-                font-size: 4vw;
+            #slate {
+                font-size: 25vw;
             }
 
-            .slate-info {
-                font-size: 20vw;
+            #scriptLocation, #shootLocation, #shootDate {
+                font-size: 8vw;
+            }
+
+            #details {
+                flex-direction: column; /* Stack vertically on small screens */
             }
         }
     </style>
@@ -42,46 +67,34 @@
 <body>
 
     <div>
-        <h1>Slate Info:</h1>
-        <div id="slateDetails"></div>
+        <p id="slate">Loading...</p>
+        <div id="details">
+            <p id="scriptLocation"></p>
+            <p id="shootLocation"></p>
+            <p id="shootDate"></p>
+        </div>
     </div>
 
     <script>
         // Get the current URL
         const url = new URL(window.location.href);
 
-        // Extract the path and query string from the URL
+        // Extract the path from the URL
         const path = url.pathname.substring(1); // Remove the leading '/'
-        const query = url.searchParams.toString(); // Get query parameters as a string
 
-        // Combine path and query string
-        let displayText = path;
+        // Split the path by underscores
+        const parts = path.split('_');
 
-        if (query) {
-            displayText += `?${query}`;
-        }
+        // Display the Slate text
+        document.getElementById('slate').textContent = parts[0]?.replace(/-/g, ' ') || "NO SLATE";
 
-        // Default message if no slate information is provided
-        if (!displayText) {
-            displayText = "NO SLATE";
-        }
+        // Display additional fields if they exist
+        document.getElementById('scriptLocation').textContent = parts[1]?.replace(/-/g, ' ') || "";
+        document.getElementById('shootLocation').textContent = parts[2]?.replace(/-/g, ' ') || "";
+        document.getElementById('shootDate').textContent = parts[3]?.replace(/-/g, ' ') || "";
 
-        // Replace hyphens with spaces for better readability
-        displayText = displayText.replace(/-/g, ' ');
-
-        // Split the text by underscores to create individual parts
-        const slateParts = displayText.split('_');
-
-        // Get the div where the slate information will be displayed
-        const slateDetailsDiv = document.getElementById('slateDetails');
-
-        // Create a paragraph for each part of the slate information
-        slateParts.forEach(part => {
-            const p = document.createElement('p');
-            p.className = 'slate-info';
-            p.textContent = part;
-            slateDetailsDiv.appendChild(p);
-        });
+        // Hide the #details container if there are no additional fields
+        document.getElementById('details').style.display = parts.length > 1 ? 'flex' : 'none';
     </script>
 
 </body>
