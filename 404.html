@@ -208,8 +208,8 @@
 
         // Display the extra field if it exists
         const extraFieldText = parts[5]?.replace(/-/g, ' ') || "";
-        document.getElementById('extraField').textContent = 'UID' + extraFieldText;
-        document.getElementById('qrCodeExtraField').textContent = extraFieldText;
+        document.getElementById('extraField').textContent = 'UID_' + extraFieldText;
+        document.getElementById('qrCodeExtraField').textContent = 'UID_' + extraFieldText;
 
         // Hide the #details container if there are no additional fields
         document.getElementById('details').style.display = parts.length > 1 ? 'flex' : 'none';
