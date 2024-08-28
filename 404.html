@@ -126,6 +126,29 @@
             transform: scale(0.95); /* Slightly shrink on click */
         }
 
+        #modeToggle {
+            position: absolute;
+            bottom: 10%;
+            left: 3%;
+            background: rgba(0, 123, 255, 0.7);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        #modeToggle:hover {
+            background: rgba(0, 123, 255, 1);
+        }
+
+        #modeToggle:active {
+            background: rgba(0, 123, 255, 0.8);
+        }
+
+
 
         @media (max-width: 600px) {
             #slate {
@@ -161,6 +184,9 @@
 <body>
 
     <button id="toggleButton" onclick="toggleQRCode()">↔</button>
+
+    <button id="modeToggle" onclick="toggleMode()">SLATE</button>
+
 
     <div id="textContainer">
         <p id="slate">Loading...</p>
@@ -241,10 +267,34 @@
         document.getElementById('qrCodeShootLocation').textContent = shootLocationText;
         document.getElementById('qrCodeShootDate').textContent = shootDateText;
     
-        // Generate the QR code
-        const qrText = encodeURIComponent(formattedPath);
-        const qrCodeUrl = `https://api.qr-code-generator.com/v1/create?access-token=Njhb8hlij4haCKqSFFCSIroT5BZX_HHWU6yns0qFmJI8v8EGV30Qcm01Vb3d1LR9&qr_code_text=${qrText}`;
-        document.getElementById('qrCodeImage').src = qrCodeUrl;
+        // Define the initial mode
+        let currentMode = "SLATE";
+
+        // Function to update the QR code
+        function updateQRCode() {
+            const url = new URL(window.location.href);
+            const path = url.pathname.substring(1); // Remove the leading '/'
+            const formattedPath = path.replace(/&&/g, '_');
+            const endString = currentMode;
+
+            // Build the QR code text
+            const qrCodeText = `${formattedPath}_${endString}`;
+            const qrText = encodeURIComponent(qrCodeText);
+            const qrCodeUrl = `https://api.qr-code-generator.com/v1/create?access-token=Njhb8hlij4haCKqSFFCSIroT5BZX_HHWU6yns0qFmJI8v8EGV30Qcm01Vb3d1LR9&qr_code_text=${qrText}`;
+            
+            document.getElementById('qrCodeImage').src = qrCodeUrl;
+        }
+
+        // Function to toggle between SLATE and HDRI
+        function toggleMode() {
+            currentMode = (currentMode === "SLATE") ? "HDRI" : "SLATE";
+            document.getElementById('modeToggle').textContent = currentMode;
+            updateQRCode(); // Regenerate QR code
+        }
+
+        // Initial QR code generation
+        updateQRCode();
+
     
         // Function to toggle QR code visibility
         function toggleQRCode() {
