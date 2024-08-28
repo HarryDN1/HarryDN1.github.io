@@ -102,12 +102,30 @@
             position: absolute;
             bottom: 3%;
             left: 3%;
-            background: transparent;
-            border: none;
+            background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+            border: 2px solid white; /* White border */
+            border-radius: 50%; /* Rounded shape */
+            width: 50px; /* Width of the button */
+            height: 50px; /* Height of the button */
+            display: flex;
+            justify-content: center;
+            align-items: center;
             cursor: pointer;
             color: white;
-            font-size: 5rem;
+            font-size: 2rem;
+            transition: background 0.3s ease, transform 0.3s ease; /* Smooth transition effects */
         }
+
+        #toggleButton:hover {
+            background: rgba(255, 255, 255, 0.4); /* Lighten background on hover */
+            transform: scale(1.1); /* Slightly enlarge on hover */
+        }
+
+        #toggleButton:active {
+            background: rgba(255, 255, 255, 0.6); /* Further lighten background on click */
+            transform: scale(0.95); /* Slightly shrink on click */
+        }
+
 
         @media (max-width: 600px) {
             #slate {
