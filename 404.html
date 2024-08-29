@@ -279,12 +279,8 @@
             const parts = formattedPath.split('_');
             const endString = currentMode;
     
-            // Extract UID from the parts (assuming it's the previous part in the array)
-            const extraFieldText = parts[5]?.replace(/-/g, '') || "";
-            const uidFieldText = 'UID_' + extraFieldText; // Prepend "UID_"
-    
             // Build the QR code text
-            const qrCodeText = `${formattedPath}_${uidFieldText}_${endString}`;
+            const qrCodeText = `${formattedPath}_${endString}`;
             const qrText = encodeURIComponent(qrCodeText);
             const qrCodeUrl = `https://api.qr-code-generator.com/v1/create?access-token=Njhb8hlij4haCKqSFFCSIroT5BZX_HHWU6yns0qFmJI8v8EGV30Qcm01Vb3d1LR9&qr_code_text=${qrText}`;
             
@@ -312,5 +308,7 @@
         }
     </script>
     
+    
+
 </body>
 </html>
