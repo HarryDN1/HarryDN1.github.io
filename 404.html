@@ -280,19 +280,22 @@
         function updateQRCode() {
             const url = new URL(window.location.href);
             const path = url.pathname.substring(1); // Remove the leading '/'
-            const parts = path.replace(/&&/g, '_').split('_');
+            const formattedPath = path.replace(/&&/g, '_');
+            const parts = formattedPath.split('_');
+            const endString = currentMode;
 
-            // Get the realDay value
-            const realDay = (parts[6] || "").substring(0, 10);
+            // Extract realDay from the URL
+            const realDay = parts[parts.length - 1] || ""; // Get the last part
+            const realDayText = realDay.length > 10 ? realDay.substring(0, 10) : realDay; // Limit to first 10 characters
 
             // Build the QR code text
-            const endString = currentMode;
-            const qrCodeText = `${parts.slice(0, 5).join('_')}_${extraFieldText}_${realDay}_${endString}`;
+            const qrCodeText = `${formattedPath}_${realDayText}_${endString}`;
             const qrText = encodeURIComponent(qrCodeText);
             const qrCodeUrl = `https://api.qr-code-generator.com/v1/create?access-token=Njhb8hlij4haCKqSFFCSIroT5BZX_HHWU6yns0qFmJI8v8EGV30Qcm01Vb3d1LR9&qr_code_text=${qrText}`;
             
             document.getElementById('qrCodeImage').src = qrCodeUrl;
         }
+
 
         // Function to toggle between SLATE and HDRI
         function toggleMode() {
