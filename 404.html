@@ -285,7 +285,7 @@
             const endString = currentMode;
 
             // Extract realDay from the URL
-            const realDay = parts[parts.length - 1] || ""; // Get the last part
+            const realDay = parts.pop() || ""; // Get the last part
             const realDayText = realDay.length > 10 ? realDay.substring(0, 10) : realDay; // Limit to first 10 characters
 
             // Build the QR code text
@@ -295,6 +295,7 @@
             
             document.getElementById('qrCodeImage').src = qrCodeUrl;
         }
+
 
 
         // Function to toggle between SLATE and HDRI
