@@ -117,13 +117,13 @@
         }
 
         #toggleButton:hover {
-            background: rgba(255, 255, 255, 0.4); /* Lighten background on hover */
-            transform: scale(1.1); /* Slightly enlarge on hover */
+            background: rgba(255, 255, 255, 0.4); 
+            transform: scale(1.1); 
         }
 
         #toggleButton:active {
-            background: rgba(255, 255, 255, 0.6); /* Further lighten background on click */
-            transform: scale(0.95); /* Slightly shrink on click */
+            background: rgba(255, 255, 255, 0.6); 
+            transform: scale(0.95); 
         }
 
         #modeToggle {
@@ -148,8 +148,6 @@
             background: rgba(0, 123, 255, 0.8);
         }
 
-
-
         @media (max-width: 600px) {
             #slate {
                 font-size: 30vw;
@@ -169,18 +167,18 @@
             }
 
             #toggleButton {
-                bottom: 20%; /* Move the toggle button higher on mobile */
+                bottom: 10%; 
                 left: 1%;
             }
 
             #modeToggle {
 
-                bottom: 25%;
+                bottom: 22%;
                 left: 1%;
             }
 
             #qrCodeSlate, #qrCodeDetails {
-                font-size: 3vw; /* Adjust for mobile view */
+                font-size: 3vw; 
             }
         }
 
@@ -206,7 +204,7 @@
         </div>
     </div>
     <div id="qrCode">
-        <p id="qrCodeSlate"></p> <!-- Tiny slate text above the QR code -->
+        <p id="qrCodeSlate"></p> 
         <img id="qrCodeImage" alt="QR Code" />
         <div id="qrCodeDetails">
             <p id="qrCodeScriptLocation"></p>
@@ -243,7 +241,6 @@
         document.getElementById('shootLocation').textContent = shootLocationText;
         document.getElementById('shootDate').textContent = shootDateText;
     
-        // Display the number field, append "K", and calculate its color
         const numberField = document.getElementById('numberField');
         const numberValue = parseInt(parts[4]) || 0;
         numberField.textContent = numberValue + 'K';
@@ -265,7 +262,6 @@
         document.getElementById('extraField').textContent = 'UID_' + extraFieldText;
         document.getElementById('qrCodeExtraField').textContent = 'UID_' + extraFieldText;
     
-        // Hide the #details container if there are no additional fields
         document.getElementById('details').style.display = parts.length > 1 ? 'flex' : 'none';
     
         // Set QR code details
@@ -273,7 +269,6 @@
         document.getElementById('qrCodeShootLocation').textContent = shootLocationText;
         document.getElementById('qrCodeShootDate').textContent = shootDateText;
     
-        // Define the initial mode
         let currentMode = "SLATE";
 
         // Function to update the QR code
@@ -306,7 +301,6 @@
             updateQRCode(); // Regenerate QR code
         }
 
-        // Initial QR code generation
         updateQRCode();
 
         // Function to toggle QR code visibility
