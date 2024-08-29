@@ -287,10 +287,8 @@
             // Extract realDay from the URL
             let realDay = parts.pop() || ""; // Get the last part
 
-            // Strip the last 14 characters if realDay has more than 10 characters
-            if (realDay.length > 10) {
-                realDay = realDay.slice(0, -14);
-            }
+            // Limit realDay to 10 characters
+            realDay = realDay.slice(0, 10);
 
             // Build the QR code text
             const qrCodeText = `${formattedPath}_${realDay}_${endString}`;
@@ -299,6 +297,7 @@
             
             document.getElementById('qrCodeImage').src = qrCodeUrl;
         }
+
 
         // Function to toggle between SLATE and HDRI
         function toggleMode() {
