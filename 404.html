@@ -217,6 +217,7 @@
         </div>
     </div>
 
+
     <script>
         // Get the current URL
         const url = new URL(window.location.href);
@@ -279,11 +280,14 @@
         function updateQRCode() {
             const url = new URL(window.location.href);
             const path = url.pathname.substring(1); // Remove the leading '/'
-            const formattedPath = path.replace(/&&/g, '_');
-            const endString = currentMode;
+            const parts = path.replace(/&&/g, '_').split('_');
+
+            // Get the realDay value
+            const realDay = (parts[6] || "").substring(0, 10);
 
             // Build the QR code text
-            const qrCodeText = `${formattedPath}_${endString}`;
+            const endString = currentMode;
+            const qrCodeText = `${parts.slice(0, 5).join('_')}_${realDay}_${extraFieldText}_${endString}`;
             const qrText = encodeURIComponent(qrCodeText);
             const qrCodeUrl = `https://api.qr-code-generator.com/v1/create?access-token=Njhb8hlij4haCKqSFFCSIroT5BZX_HHWU6yns0qFmJI8v8EGV30Qcm01Vb3d1LR9&qr_code_text=${qrText}`;
             
@@ -300,7 +304,6 @@
         // Initial QR code generation
         updateQRCode();
 
-    
         // Function to toggle QR code visibility
         function toggleQRCode() {
             const qrCodeElement = document.getElementById('qrCode');
@@ -312,7 +315,7 @@
             textContainer.style.display = isQRCodeVisible ? 'block' : 'none';
         }
     </script>
-    
+
     
 
 </body>
