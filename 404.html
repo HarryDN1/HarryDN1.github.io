@@ -285,8 +285,8 @@
             const formattedPath = path.replace(/&&/g, '_');
             const endString = currentMode;
     
-            // Build the QR code text with the Day field included
-            const qrCodeText = `${formattedPath}_${dayField}_${endString}`;
+            // Build the QR code text with the Day field included correctly
+            const qrCodeText = `${parts[0]}_${parts[1]}_${parts[2]}_${parts[3]}_${parts[4]}_${dayField}_${parts[6]}_${endString}`;
             const qrText = encodeURIComponent(qrCodeText);
             const qrCodeUrl = `https://api.qr-code-generator.com/v1/create?access-token=Njhb8hlij4haCKqSFFCSIroT5BZX_HHWU6yns0qFmJI8v8EGV30Qcm01Vb3d1LR9&qr_code_text=${qrText}`;
             
@@ -303,7 +303,6 @@
         // Initial QR code generation
         updateQRCode();
     
-    
         // Function to toggle QR code visibility
         function toggleQRCode() {
             const qrCodeElement = document.getElementById('qrCode');
@@ -315,7 +314,7 @@
             textContainer.style.display = isQRCodeVisible ? 'block' : 'none';
         }
     </script>
-        
+    
     
 
 </body>
