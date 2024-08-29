@@ -223,8 +223,8 @@
         // Extract the path from the URL
         const path = url.pathname.substring(1); // Remove the leading '/'
     
-        // Replace '++' with single underscores
-        const formattedPath = path.replace(/++/g, '_');
+        // Replace '&&' with single underscores
+        const formattedPath = path.replace(/&&/g, '_');
     
         // Display the Slate text
         const parts = formattedPath.split('_');
@@ -275,7 +275,7 @@
         function updateQRCode() {
             const url = new URL(window.location.href);
             const path = url.pathname.substring(1); // Remove the leading '/'
-            const formattedPath = path.replace(/++/g, '_');
+            const formattedPath = path.replace(/&&/g, '_');
             const parts = formattedPath.split('_');
             const endString = currentMode;
 
