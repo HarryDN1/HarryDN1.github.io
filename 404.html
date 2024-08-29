@@ -287,7 +287,7 @@
 
             // Build the QR code text
             const endString = currentMode;
-            const qrCodeText = `${parts.slice(0, 5).join('_')}_${realDay}_${extraFieldText}_${endString}`;
+            const qrCodeText = `${parts.slice(0, 5).join('_')}_${extraFieldText}_${realDay}_${endString}`;
             const qrText = encodeURIComponent(qrCodeText);
             const qrCodeUrl = `https://api.qr-code-generator.com/v1/create?access-token=Njhb8hlij4haCKqSFFCSIroT5BZX_HHWU6yns0qFmJI8v8EGV30Qcm01Vb3d1LR9&qr_code_text=${qrText}`;
             
