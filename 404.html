@@ -217,118 +217,102 @@
         </div>
     </div>
 
-<script>
-    // Get the current URL
-    const url = new URL(window.location.href);
-
-    // Extract the path from the URL
-    const path = url.pathname.substring(1); // Remove the leading '/'
-
-    // Replace '&&' with single underscores
-    const formattedPath = path.replace(/&&/g, '_');
-
-    // Display the Slate text
-    const parts = formattedPath.split('_');
-    const slateText = parts[0]?.replace(/-/g, ' ') || "NO SLATE";
-    document.getElementById('slate').textContent = slateText;
-    document.getElementById('qrCodeSlate').textContent = slateText;
-
-    // Display additional fields if they exist
-    const scriptLocationText = parts[1]?.replace(/-/g, ' ') || "";
-    const shootLocationText = parts[2]?.replace(/-/g, ' ') || "";
-    const shootDateText = parts[3]?.replace(/-/g, ' ') || "";
-
-    document.getElementById('scriptLocation').textContent = scriptLocationText;
-    document.getElementById('shootLocation').textContent = shootLocationText;
-    document.getElementById('shootDate').textContent = shootDateText;
-
-    // Display the number field, append "K", and calculate its color
-    const numberField = document.getElementById('numberField');
-    const numberValue = parseInt(parts[4]) || 0;
-    numberField.textContent = numberValue + 'K';
-    numberField.style.color = getColorForNumber(numberValue);
-
-    function getColorForNumber(number) {
-        const min = 3000;
-        const max = 7500;
-        const percentage = (number - min) / (max - min);
-        const colorValue = Math.min(Math.max(percentage * 255, 0), 255);
-
-        return `rgb(${255}, ${colorValue}, ${colorValue})`;
-    }
-
-    document.getElementById('qrCodeNumberField').textContent = numberValue + 'K';
-
-    // Display the extra field if it exists
-    const extraFieldText = parts[6]?.replace(/-/g, ' ') || "";
-    document.getElementById('extraField').textContent = 'UID_' + extraFieldText;
-    document.getElementById('qrCodeExtraField').textContent = 'UID_' + extraFieldText;
-
-    // Hide the #details container if there are no additional fields
-    document.getElementById('details').style.display = parts.length > 1 ? 'flex' : 'none';
-
-    // Set QR code details
-    document.getElementById('qrCodeScriptLocation').textContent = scriptLocationText;
-    document.getElementById('qrCodeShootLocation').textContent = shootLocationText;
-    document.getElementById('qrCodeShootDate').textContent = shootDateText;
-
-    // Extract the Day field from the URL path and format it
-    const dayField = (parts[5]?.replace(/-/g, ' ') || "").slice(0, 10).replace(/\s+/g, '-');
-
-    // Function to update the QR code
-    function updateQRCode() {
+    <script>
+        // Get the current URL
         const url = new URL(window.location.href);
+    
+        // Extract the path from the URL
         const path = url.pathname.substring(1); // Remove the leading '/'
+    
+        // Replace '&&' with single underscores
         const formattedPath = path.replace(/&&/g, '_');
-        const endString = currentMode;
+    
+        // Display the Slate text
+        const parts = formattedPath.split('_');
+        const slateText = parts[0]?.replace(/-/g, ' ') || "NO SLATE";
+        document.getElementById('slate').textContent = slateText;
+        document.getElementById('qrCodeSlate').textContent = slateText;
+    
+        // Display additional fields if they exist
+        const scriptLocationText = parts[1]?.replace(/-/g, ' ') || "";
+        const shootLocationText = parts[2]?.replace(/-/g, ' ') || "";
+        const shootDateText = parts[3]?.replace(/-/g, ' ') || "";
+    
+        document.getElementById('scriptLocation').textContent = scriptLocationText;
+        document.getElementById('shootLocation').textContent = shootLocationText;
+        document.getElementById('shootDate').textContent = shootDateText;
+    
+        // Display the number field, append "K", and calculate its color
+        const numberField = document.getElementById('numberField');
+        const numberValue = parseInt(parts[4]) || 0;
+        numberField.textContent = numberValue + 'K';
+        numberField.style.color = getColorForNumber(numberValue);
+    
+        function getColorForNumber(number) {
+            const min = 3000;
+            const max = 7500;
+            const percentage = (number - min) / (max - min);
+            const colorValue = Math.min(Math.max(percentage * 255, 0), 255);
+    
+            return `rgb(${255}, ${colorValue}, ${colorValue})`;
+        }
+    
+        document.getElementById('qrCodeNumberField').textContent = numberValue + 'K';
+    
+        // Display the extra field if it exists
+        const extraFieldText = parts[5]?.replace(/-/g, ' ') || "";
+        document.getElementById('extraField').textContent = 'UID_' + extraFieldText;
+        document.getElementById('qrCodeExtraField').textContent = 'UID_' + extraFieldText;
+    
+        // Hide the #details container if there are no additional fields
+        document.getElementById('details').style.display = parts.length > 1 ? 'flex' : 'none';
+    
+        // Set QR code details
+        document.getElementById('qrCodeScriptLocation').textContent = scriptLocationText;
+        document.getElementById('qrCodeShootLocation').textContent = shootLocationText;
+        document.getElementById('qrCodeShootDate').textContent = shootDateText;
+    
+        // Define the initial mode
+        let currentMode = "SLATE";
 
-        // Build the QR code text with the Day field included correctly
-        const qrCodeText = `${parts[0]}_${parts[1]}_${parts[2]}_${parts[3]}_${parts[4]}_${dayField}_${parts[6]}_${endString}`;
-        const qrText = encodeURIComponent(qrCodeText);
-        const qrCodeUrl = `https://api.qr-code-generator.com/v1/create?access-token=Njhb8hlij4haCKqSFFCSIroT5BZX_HHWU6yns0qFmJI8v8EGV30Qcm01Vb3d1LR9&qr_code_text=${qrText}`;
-        
-        document.getElementById('qrCodeImage').src = qrCodeUrl;
+        // Function to update the QR code
+        function updateQRCode() {
+            const url = new URL(window.location.href);
+            const path = url.pathname.substring(1); // Remove the leading '/'
+            const formattedPath = path.replace(/&&/g, '_');
+            const endString = currentMode;
 
-    // Define the initial mode
-    let currentMode = "SLATE";
+            // Build the QR code text
+            const qrCodeText = `${formattedPath}_${endString}`;
+            const qrText = encodeURIComponent(qrCodeText);
+            const qrCodeUrl = `https://api.qr-code-generator.com/v1/create?access-token=Njhb8hlij4haCKqSFFCSIroT5BZX_HHWU6yns0qFmJI8v8EGV30Qcm01Vb3d1LR9&qr_code_text=${qrText}`;
+            
+            document.getElementById('qrCodeImage').src = qrCodeUrl;
+        }
 
-    // Function to update the QR code
-    function updateQRCode() {
-        const url = new URL(window.location.href);
-        const path = url.pathname.substring(1); // Remove the leading '/'
-        const formattedPath = path.replace(/&&/g, '_');
-        const endString = currentMode;
+        // Function to toggle between SLATE and HDRI
+        function toggleMode() {
+            currentMode = (currentMode === "SLATE") ? "HDRI" : "SLATE";
+            document.getElementById('modeToggle').textContent = currentMode;
+            updateQRCode(); // Regenerate QR code
+        }
 
-        // Build the QR code text with the Day field included correctly
-        const qrCodeText = `${parts[0]}_${parts[1]}_${parts[2]}_${parts[3]}_${parts[4]}_${dayField}_${parts[6]}_${endString}`;
-        const qrText = encodeURIComponent(qrCodeText);
-        const qrCodeUrl = `https://api.qr-code-generator.com/v1/create?access-token=Njhb8hlij4haCKqSFFCSIroT5BZX_HHWU6yns0qFmJI8v8EGV30Qcm01Vb3d1LR9&qr_code_text=${qrText}`;
-        
-        document.getElementById('qrCodeImage').src = qrCodeUrl;
-    }
+        // Initial QR code generation
+        updateQRCode();
 
-    // Function to toggle between SLATE and HDRI
-    function toggleMode() {
-        currentMode = (currentMode === "SLATE") ? "HDRI" : "SLATE";
-        document.getElementById('modeToggle').textContent = currentMode;
-        updateQRCode(); // Regenerate QR code
-    }
-
-    // Initial QR code generation
-    updateQRCode();
-
-    // Function to toggle QR code visibility
-    function toggleQRCode() {
-        const qrCodeElement = document.getElementById('qrCode');
-        const textContainer = document.getElementById('textContainer');
-
-        const isQRCodeVisible = qrCodeElement.style.display !== 'none';
-        
-        qrCodeElement.style.display = isQRCodeVisible ? 'none' : 'block';
-        textContainer.style.display = isQRCodeVisible ? 'block' : 'none';
-    }
-</script>
-
+    
+        // Function to toggle QR code visibility
+        function toggleQRCode() {
+            const qrCodeElement = document.getElementById('qrCode');
+            const textContainer = document.getElementById('textContainer');
+    
+            const isQRCodeVisible = qrCodeElement.style.display !== 'none';
+            
+            qrCodeElement.style.display = isQRCodeVisible ? 'none' : 'block';
+            textContainer.style.display = isQRCodeVisible ? 'block' : 'none';
+        }
+    </script>
+    
     
 
 </body>
