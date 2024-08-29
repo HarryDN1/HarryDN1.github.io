@@ -223,8 +223,8 @@
         // Extract the path from the URL
         const path = url.pathname.substring(1); // Remove the leading '/'
     
-        // Replace '&&' with single underscores
-        const formattedPath = path.replace(/&&/g, '_');
+        // Replace '++' with single underscores
+        const formattedPath = path.replace(/\+\+/g, '_');
     
         // Display the Slate text
         const parts = formattedPath.split('_');
@@ -270,21 +270,15 @@
         document.getElementById('qrCodeShootDate').textContent = shootDateText;
     
         let currentMode = "SLATE";
-
+    
         // Function to update the QR code
         function updateQRCode() {
             const url = new URL(window.location.href);
             const path = url.pathname.substring(1); // Remove the leading '/'
-            const formattedPath = path.replace(/&&/g, '_');
+            const formattedPath = path.replace(/\+\+/g, '_');
             const parts = formattedPath.split('_');
             const endString = currentMode;
-
-            // Extract realDay from the URL
-           // let realDay = parts.pop() || ""; // Get the last part
-
-            // Limit realDay to 10 characters
-           // realDay = realDay.slice(0, 10);
-
+    
             // Build the QR code text
             const qrCodeText = `${formattedPath}_${endString}`;
             const qrText = encodeURIComponent(qrCodeText);
@@ -292,17 +286,16 @@
             
             document.getElementById('qrCodeImage').src = qrCodeUrl;
         }
-
-
+    
         // Function to toggle between SLATE and HDRI
         function toggleMode() {
             currentMode = (currentMode === "SLATE") ? "HDRI" : "SLATE";
             document.getElementById('modeToggle').textContent = currentMode;
             updateQRCode(); // Regenerate QR code
         }
-
+    
         updateQRCode();
-
+    
         // Function to toggle QR code visibility
         function toggleQRCode() {
             const qrCodeElement = document.getElementById('qrCode');
@@ -314,7 +307,7 @@
             textContainer.style.display = isQRCodeVisible ? 'block' : 'none';
         }
     </script>
-
+    
     
 
 </body>
