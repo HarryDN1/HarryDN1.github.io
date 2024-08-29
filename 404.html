@@ -260,7 +260,7 @@
     
         document.getElementById('qrCodeNumberField').textContent = numberValue + 'K';
     
-        // Display the extra field if it exists
+        // Display the UID field if it exists
         const extraFieldText = parts[5]?.replace(/-/g, ' ') || "";
         document.getElementById('extraField').textContent = 'UID_' + extraFieldText;
         document.getElementById('qrCodeExtraField').textContent = 'UID_' + extraFieldText;
@@ -285,10 +285,10 @@
             const endString = currentMode;
 
             // Extract realDay from the URL
-            let realDay = parts.pop() || ""; // Get the last part
+           // let realDay = parts.pop() || ""; // Get the last part
 
             // Limit realDay to 10 characters
-            realDay = realDay.slice(0, 10);
+           // realDay = realDay.slice(0, 10);
 
             // Build the QR code text
             const qrCodeText = `${formattedPath}_${endString}`;
