@@ -258,7 +258,7 @@
         document.getElementById('qrCodeNumberField').textContent = numberValue + 'K';
     
         // Display the UID field if it exists
-        const extraFieldText = parts[5]?.replace(/-/g, ' ') || "";
+        const extraFieldText = parts[5]?.replace(/-/g, ' ') || "UID_";
         document.getElementById('extraField').textContent = 'UID_' + extraFieldText;
         document.getElementById('qrCodeExtraField').textContent = 'UID_' + extraFieldText;
     
