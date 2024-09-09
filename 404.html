@@ -205,7 +205,7 @@
     </div>
     <div id="qrCode">
         <p id="qrCodeSlate"></p> 
-        <img id="qrCodeImage" alt="QR Code" />
+        <img id="qrcode" alt="QR Code" />
         <div id="qrCodeDetails">
             <p id="qrCodeScriptLocation"></p>
             <p id="qrCodeShootLocation"></p>
@@ -284,20 +284,19 @@
             const qrCodeText = `${formattedPath}_${endString}`;
 
             // Generate the QR code using qrcode.js
-            qrcode.clear(); // clear the code.
-            var qrcode = new QRCode(document.getElementById("qrCodeImage"), {
+            const qrCodeElement = document.getElementById("qrcode");
+            if (!qrCodeElement) {
+                console.error("qrcode element not found");
+                return;
+            }
+            qrCodeElement.innerHTML = ""; // Clear any existing QR code
+            new QRCode(qrCodeElement, {
                 text: qrCodeText,
                 width: 128,
                 height: 128,
-                colorDark : "#000000",
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H
-
-            // qrcode.clear(); // clear the previous QR code
-            // new QRCode(qrCodeElement, {
-            //     text: qrCodeText,
-            //     width: 256,
-            //     height: 256
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
             });
         }
 
