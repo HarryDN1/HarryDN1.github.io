@@ -215,6 +215,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 
     <script>
         // Get the current URL
@@ -270,7 +271,7 @@
         document.getElementById('qrCodeShootDate').textContent = shootDateText;
     
         let currentMode = "SLATE";
-    
+
         // Function to update the QR code
         function updateQRCode() {
             const url = new URL(window.location.href);
@@ -278,37 +279,39 @@
             const formattedPath = path.replace(/\+\+/g, '_');
             const parts = formattedPath.split('_');
             const endString = currentMode;
-    
+
             // Build the QR code text
             const qrCodeText = `${formattedPath}_${endString}`;
-            const qrText = encodeURIComponent(qrCodeText);
-            const qrCodeUrl = `https://api.qr-code-generator.com/v1/create?access-token=Njhb8hlij4haCKqSFFCSIroT5BZX_HHWU6yns0qFmJI8v8EGV30Qcm01Vb3d1LR9&qr_code_text=${qrText}`;
-            
-            document.getElementById('qrCodeImage').src = qrCodeUrl;
+
+            // Generate the QR code using qrcode.js
+            const qrCodeElement = document.getElementById('qrCodeImage');
+            qrCodeElement.innerHTML = ""; // Clear any existing QR code
+            new QRCode(qrCodeElement, {
+                text: qrCodeText,
+                width: 256,
+                height: 256
+            });
         }
-    
+
         // Function to toggle between SLATE and HDRI
         function toggleMode() {
             currentMode = (currentMode === "SLATE") ? "HDRI" : "SLATE";
             document.getElementById('modeToggle').textContent = currentMode;
             updateQRCode(); // Regenerate QR code
         }
-    
+
         updateQRCode();
-    
+
         // Function to toggle QR code visibility
         function toggleQRCode() {
             const qrCodeElement = document.getElementById('qrCode');
             const textContainer = document.getElementById('textContainer');
-    
+
             const isQRCodeVisible = qrCodeElement.style.display !== 'none';
             
             qrCodeElement.style.display = isQRCodeVisible ? 'none' : 'block';
             textContainer.style.display = isQRCodeVisible ? 'block' : 'none';
         }
     </script>
-    
-    
-
 </body>
 </html>
