@@ -215,7 +215,7 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+    <script src="js/qrcode.min.js"></script>
 
     <script>
         // Get the current URL
@@ -285,7 +285,7 @@
 
             // Generate the QR code using qrcode.js
             const qrCodeElement = document.getElementById('qrCodeImage');
-            qrCodeElement.innerHTML = ""; // Clear any existing QR code
+            qrcode.clear(); // clear the previous QR code
             new QRCode(qrCodeElement, {
                 text: qrCodeText,
                 width: 256,
