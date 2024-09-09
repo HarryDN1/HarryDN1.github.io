@@ -284,12 +284,19 @@
             const qrCodeText = `${formattedPath}_${endString}`;
 
             // Generate the QR code using qrcode.js
-            const qrCodeElement = document.getElementById('qrCodeImage');
-            qrcode.clear(); // clear the previous QR code
-            new QRCode(qrCodeElement, {
+            var qrcode = new QRCode(document.getElementById("qrcode"), {
                 text: qrCodeText,
-                width: 256,
-                height: 256
+                width: 128,
+                height: 128,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+
+            // qrcode.clear(); // clear the previous QR code
+            // new QRCode(qrCodeElement, {
+            //     text: qrCodeText,
+            //     width: 256,
+            //     height: 256
             });
         }
 
