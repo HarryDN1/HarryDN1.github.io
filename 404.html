@@ -284,6 +284,7 @@
             const qrCodeText = `${formattedPath}_${endString}`;
 
             // Generate the QR code using qrcode.js
+            qrcode.clear(); // clear the code.
             var qrcode = new QRCode(document.getElementById("qrCodeImage"), {
                 text: qrCodeText,
                 width: 128,
