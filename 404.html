@@ -71,9 +71,7 @@
             padding: 1vw;
             width: 65vw;
             height: auto;
-            display: flex; /* Use Flexbox */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
+            display: block; /* Show QR code by default */
             text-align: center;
         }
 
@@ -294,8 +292,8 @@
             qrCodeElement.innerHTML = ""; // Clear any existing QR code
             new QRCode(qrCodeElement, {
                 text: qrCodeText,
-                width: 256,
-                height: 256,
+                width: 1024,
+                height: 1024,
                 colorDark: "#000000",
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
