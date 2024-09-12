@@ -331,18 +331,9 @@
             textContainer.style.display = isQRCodeVisible ? 'block' : 'none';
         }
     
-        // Check if it's a "witcam" slate
-        const isWitcamSlate = parts.length === 8;
-    
-        // Additional information for "witcam" slate
-        if (isWitcamSlate) {
-            const additionalInfo = parts[7]?.replace(/-/g, ' ') || "";
-            document.getElementById('witcamField').textContent = additionalInfo;
-    
-            // Hide QR code for "witcam" slate
-            document.getElementById('qrCode').style.display = 'none';
-            document.getElementById('textContainer').style.display = 'block';
-        }
+        // Populate the witcamField with the 8th string if it exists
+        const witcamFieldText = parts[7]?.replace(/-/g, ' ') || "";
+        document.getElementById('witcamField').textContent = witcamFieldText;
     </script>
 </body>
 </html>
