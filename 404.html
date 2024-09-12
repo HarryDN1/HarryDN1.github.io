@@ -226,7 +226,7 @@
     <script src="js/qrcode.min.js"></script>
 
     <script>
-        let currentMode = "SLATE"; // Initialize currentMode
+        let currentMode = "SLATE"; 
 
         // Get the current URL
         const url = new URL(window.location.href);
@@ -289,7 +289,7 @@
         if (isWitcamSlate) {
             const additionalInfo = parts[7]?.replace(/-/g, ' ') || "";
             const additionalInfoElement = document.createElement('p');
-            additionalInfoElement.id = 'additionalInfo';
+            additionalInfoElement.id = 'witcamField';
             additionalInfoElement.textContent = additionalInfo;
             document.getElementById('textContainer').appendChild(additionalInfoElement);
     
