@@ -46,16 +46,16 @@
             margin-top: 1vw;
         }
 
-        #witcamField {
-            font-size: 2vw;
-            margin-top: 1vw;
-            color: rgba(239, 47, 146, 0.63);
-        }
-
         #extraField {
             font-size: 2vw;
             margin-top: 0.5vw;
             color: rgba(255, 255, 255, 0.63);
+        }
+
+        #witcamField {
+            font-size: 2vw;
+            margin-top: 1vw;
+            color: rgba(239, 47, 146, 0.63);
         }
 
         #details {
@@ -194,9 +194,7 @@
 <body>
 
     <button id="toggleButton" onclick="toggleQRCode()">↔</button>
-
     <button id="modeToggle" onclick="toggleMode()">SLATE</button>
-
 
     <div id="textContainer">
         <p id="slate">Loading...</p>
@@ -205,9 +203,9 @@
                 <p id="scriptLocation"></p>
                 <p id="shootLocation"></p>
                 <p id="shootDate"></p>
+                <p id="witcamField"></p>
             </div>
             <p id="numberField"></p>
-            <p id="witcamField"></p>
             <p id="extraField"></p>
         </div>
     </div>
@@ -226,8 +224,6 @@
     <script src="js/qrcode.min.js"></script>
 
     <script>
-        let currentMode = "SLATE"; 
-
         // Get the current URL
         const url = new URL(window.location.href);
     
@@ -239,9 +235,6 @@
     
         // Split the path into parts
         const parts = formattedPath.split('_');
-    
-        // Check if it's a "witcam" slate
-        const isWitcamSlate = parts.length === 8;
     
         // Display the Slate text
         const slateText = parts[0]?.replace(/-/g, ' ') || "NO SLATE";
@@ -285,20 +278,9 @@
         document.getElementById('qrCodeShootLocation').textContent = shootLocationText;
         document.getElementById('qrCodeShootDate').textContent = shootDateText;
     
-        // Additional information for "witcam" slate
-        if (isWitcamSlate) {
-            const witcamInfo = parts[7]?.replace(/-/g, ' ') || "";
-            const witcamInfoElement = document.createElement('p');
-            witcamInfoElement.id = 'witcamField';
-            witcamInfoElement.textContent = additionalInfo;
-            document.getElementById('textContainer').appendChild(witcamInfoElement);
+        updateQRCode();
     
-            // Hide QR code for "witcam" slate
-            document.getElementById('qrCode').style.display = 'none';
-            document.getElementById('textContainer').style.display = 'block';
-        } else {
-            updateQRCode();
-        }
+        let currentMode = "SLATE";
     
         // Function to update the QR code
         function updateQRCode() {
@@ -349,9 +331,17 @@
             textContainer.style.display = isQRCodeVisible ? 'block' : 'none';
         }
     
-        // Automatically toggle to the second page if it's a "witcam" slate
+        // Check if it's a "witcam" slate
+        const isWitcamSlate = parts.length === 8;
+    
+        // Additional information for "witcam" slate
         if (isWitcamSlate) {
-            toggleQRCode();
+            const additionalInfo = parts[7]?.replace(/-/g, ' ') || "";
+            document.getElementById('witcamField').textContent = additionalInfo;
+    
+            // Hide QR code for "witcam" slate
+            document.getElementById('qrCode').style.display = 'none';
+            document.getElementById('textContainer').style.display = 'block';
         }
     </script>
 </body>
