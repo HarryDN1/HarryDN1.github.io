@@ -46,6 +46,12 @@
             margin-top: 1vw;
         }
 
+        #additionalInfo {
+            font-size: 2vw;
+            margin-top: 1vw;
+            color: rgba(239, 47, 146, 0.63);
+        }
+
         #extraField {
             font-size: 2vw;
             margin-top: 0.5vw;
@@ -224,78 +230,75 @@
     
         // Extract the path from the URL
         const path = url.pathname.substring(1); // Remove the leading '/'
-        
+    
         // Replace '++' with single underscores
         const formattedPath = path.replace(/\+\+/g, '_');
-        
+    
         // Split the path into parts
         const parts = formattedPath.split('_');
-        
+    
         // Check if it's a "witcam" slate
         const isWitcamSlate = parts.length === 8;
-        
+    
         // Display the Slate text
         const slateText = parts[0]?.replace(/-/g, ' ') || "NO SLATE";
         document.getElementById('slate').textContent = slateText;
         document.getElementById('qrCodeSlate').textContent = slateText;
-        
+    
         // Display additional fields if they exist
         const scriptLocationText = parts[1]?.replace(/-/g, ' ') || "";
         const shootLocationText = parts[2]?.replace(/-/g, ' ') || "";
         const shootDateText = parts[3]?.replace(/-/g, ' ') || "";
-        
+    
         document.getElementById('scriptLocation').textContent = scriptLocationText;
         document.getElementById('shootLocation').textContent = shootLocationText;
         document.getElementById('shootDate').textContent = shootDateText;
-        
+    
         const numberField = document.getElementById('numberField');
         const numberValue = parseInt(parts[4]) || 0;
         numberField.textContent = numberValue + 'K';
         numberField.style.color = getColorForNumber(numberValue);
-        
+    
         function getColorForNumber(number) {
             const min = 3000;
             const max = 7500;
             const percentage = (number - min) / (max - min);
             const colorValue = Math.min(Math.max(percentage * 255, 0), 255);
-        
+    
             return `rgb(${255}, ${colorValue}, ${colorValue})`;
         }
-        
+    
         document.getElementById('qrCodeNumberField').textContent = numberValue + 'K';
-        
+    
         // Display the UID field if it exists
         const extraFieldText = parts[5]?.replace(/-/g, '') || "";
         document.getElementById('extraField').textContent = 'UID_' + extraFieldText;
         document.getElementById('qrCodeExtraField').textContent = 'UID_' + extraFieldText;
-        
+    
         document.getElementById('details').style.display = parts.length > 1 ? 'flex' : 'none';
-        
+    
         // Set QR code details
         document.getElementById('qrCodeScriptLocation').textContent = scriptLocationText;
         document.getElementById('qrCodeShootLocation').textContent = shootLocationText;
         document.getElementById('qrCodeShootDate').textContent = shootDateText;
-        
+    
         // Additional information for "witcam" slate
         if (isWitcamSlate) {
             const additionalInfo = parts[7]?.replace(/-/g, ' ') || "";
             const additionalInfoElement = document.createElement('p');
             additionalInfoElement.id = 'additionalInfo';
             additionalInfoElement.textContent = additionalInfo;
-            additionalInfoElement.style.fontSize = '2vw';
-            additionalInfoElement.style.marginTop = '1vw';
-            additionalInfoElement.style.color = 'rgba(255, 255, 255, 0.63)';
             document.getElementById('textContainer').appendChild(additionalInfoElement);
-        
+    
             // Hide QR code for "witcam" slate
             document.getElementById('qrCode').style.display = 'none';
             document.getElementById('textContainer').style.display = 'block';
         } else {
             updateQRCode();
         }
-        
+    
         let currentMode = "SLATE";
-        
+    
         // Function to update the QR code
         function updateQRCode() {
             const url = new URL(window.location.href);
@@ -303,13 +306,13 @@
             const formattedPath = path.replace(/\+\+/g, '_');
             const parts = formattedPath.split('_');
             const endString = currentMode;
-        
+    
             // Build the QR code text
             const qrCodeText = `${formattedPath}_${endString}`;
-        
+    
             // Determine the colorLight based on the current mode
             const colorLight = currentMode === "HDRI" ? "#FF9C9C" : "#DBFDFF";
-        
+    
             // Generate the QR code using qrcode.js
             const qrCodeElement = document.getElementById("qrcode");
             if (!qrCodeElement) {
@@ -326,23 +329,28 @@
                 correctLevel: QRCode.CorrectLevel.M
             });
         }
-        
+    
         // Function to toggle between SLATE and HDRI
         function toggleMode() {
             currentMode = (currentMode === "SLATE") ? "HDRI" : "SLATE";
             document.getElementById('modeToggle').textContent = currentMode;
             updateQRCode(); // Regenerate QR code
         }
-        
+    
         // Function to toggle QR code visibility
         function toggleQRCode() {
             const qrCodeElement = document.getElementById('qrCode');
             const textContainer = document.getElementById('textContainer');
-        
+    
             const isQRCodeVisible = qrCodeElement.style.display !== 'none';
-            
+    
             qrCodeElement.style.display = isQRCodeVisible ? 'none' : 'block';
             textContainer.style.display = isQRCodeVisible ? 'block' : 'none';
+        }
+    
+        // Automatically toggle to the second page if it's a "witcam" slate
+        if (isWitcamSlate) {
+            toggleQRCode();
         }
     </script>
 </body>
