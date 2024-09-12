@@ -225,6 +225,8 @@
     <script src="js/qrcode.min.js"></script>
 
     <script>
+        let currentMode = "SLATE"; // Initialize currentMode
+
         // Get the current URL
         const url = new URL(window.location.href);
     
@@ -296,8 +298,6 @@
         } else {
             updateQRCode();
         }
-    
-        let currentMode = "SLATE";
     
         // Function to update the QR code
         function updateQRCode() {
