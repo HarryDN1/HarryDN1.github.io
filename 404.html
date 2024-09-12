@@ -287,11 +287,11 @@
     
         // Additional information for "witcam" slate
         if (isWitcamSlate) {
-            const additionalInfo = parts[7]?.replace(/-/g, ' ') || "";
-            const additionalInfoElement = document.createElement('p');
-            additionalInfoElement.id = 'witcamField';
-            additionalInfoElement.textContent = additionalInfo;
-            document.getElementById('textContainer').appendChild(additionalInfoElement);
+            const witcamInfo = parts[7]?.replace(/-/g, ' ') || "";
+            const witcamInfoElement = document.createElement('p');
+            witcamInfoElement.id = 'witcamField';
+            witcamInfoElement.textContent = additionalInfo;
+            document.getElementById('textContainer').appendChild(witcamInfoElement);
     
             // Hide QR code for "witcam" slate
             document.getElementById('qrCode').style.display = 'none';
