@@ -332,7 +332,7 @@
         }
     
         // Populate the witcamField with the 8th string if it exists
-        const witcamFieldText = parts[7]?.replace(/-/g, ' ') || "";
+        const witcamFieldText = parts.slice(7).join('_').replace(/-/g, ' ') || "";
         document.getElementById('witcamField').textContent = witcamFieldText;
     </script>
 </body>
