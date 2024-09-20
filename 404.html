@@ -111,7 +111,7 @@
             position: absolute;
             bottom: 3%;
             left: 3%;
-            background: rgba(222, 6, 6, 0.54); 
+            background: rgba(222, 6, 0, 0.54); 
             border: 2px solid rgb(252, 0, 0); 
             border-radius: 50%; 
             width: 50px; 
@@ -325,9 +325,22 @@
             textContainer.style.display = isQRCodeVisible ? 'block' : 'none';
         }
     
+        // Function to adjust font size based on text length
+        function adjustFontSize(element, baseSize) {
+            const textLength = element.textContent.length;
+            const newSize = baseSize - (textLength * 0.1);
+            element.style.fontSize = `${newSize}vw`;
+        }
+    
         // Populate the witcamField with the 8th string if it exists
         const witcamFieldText = parts.slice(7).join('_').replace(/-/g, ' ') || "";
         document.getElementById('witcamField').textContent = witcamFieldText;
+    
+        // Adjust font sizes
+        adjustFontSize(document.getElementById('shootDate'), 3);
+        adjustFontSize(document.getElementById('numberField'), 4);
+        adjustFontSize(document.getElementById('extraField'), 2);
+        adjustFontSize(document.getElementById('witcamField'), 2);
     </script>
 </body>
 </html>
