@@ -162,7 +162,7 @@
                 font-size: 30vw;
             }
 
-            #scriptLocation, #shootLocation, #shootDate, #numberField {
+            #scriptLocation, #shootLocation, #numberField {
                 font-size: 6.5vw;
             }
 
@@ -222,6 +222,7 @@
         <p id="qrCodeSlate"></p> 
         <div id="qrcode">
             <img id="qrCodeImage" alt="QR Generator" src="" />
+            <p id="currentState"></p>
         </div> 
         <div id="qrCodeDetails">
             <p id="qrCodeScriptLocation"></p>
@@ -305,6 +306,9 @@
             // Set the src attribute of the QR code image
             const qrCodeImage = document.getElementById("qrCodeImage");
             qrCodeImage.src = `https://barcode.tec-it.com/barcode.ashx?data=${encodeURIComponent(qrCodeText)}&code=QRCode&unit=Px&dpi=500&imagetype=Jpg&qunit=Mm&quiet=10&dmsize=Default&eclevel=H&modulewidth=20`;
+            
+            // Set the current state text
+            document.getElementById('currentState').textContent = currentMode;
         }
     
         // Function to toggle between SLATE and HDRI
