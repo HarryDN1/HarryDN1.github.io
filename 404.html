@@ -73,6 +73,13 @@
             gap: 3vw;
         }
 
+        #rowFields {
+            display: flex;
+            gap: 1.5vw; 
+            justify-content: center;
+            align-items: center;
+        }
+
         #qrCode {
             margin: 0;
             padding: 1vw;
@@ -162,7 +169,7 @@
                 font-size: 30vw;
             }
 
-            #scriptLocation, #shootLocation, #numberField {
+            #scriptLocation, #shootLocation, #shootDate, #numberField {
                 font-size: 6.5vw;
             }
 
@@ -212,16 +219,19 @@
                 <p id="scriptLocation"></p>
                 <p id="shootLocation"></p>
             </div>
+            <div id="rowFields">
                 <p id="shootDate"></p>
                 <p id="numberField"></p>
                 <p id="extraField"></p>
-                <p id="witcamField"></p>
+            </div>
+            <p id="witcamField"></p>
         </div>
     </div>
     <div id="qrCode">
         <p id="qrCodeSlate"></p> 
         <div id="qrcode">
             <img id="qrCodeImage" alt="QR Generator" src="" />
+            <p id="currentState"></p>
         </div> 
         <div id="qrCodeDetails">
             <p id="qrCodeScriptLocation"></p>
@@ -229,7 +239,6 @@
             <p id="qrCodeShootDate"></p>
             <p id="qrCodeNumberField"></p>
             <p id="qrCodeExtraField"></p>
-            <p id="currentState"></p>
         </div>
     </div>
 
