@@ -228,7 +228,7 @@
         </div>
     </div>
     <div id="qrCode">
-        <p id="qrCodeSlate"></p> 
+        <p id="qrCodeSlate">Slate Ref</p> 
         <div id="qrcode">
             <img id="qrCodeImage" alt="QR Generator" src="" />
             <p id="currentState"></p>
@@ -260,7 +260,6 @@
         // Display the Slate text
         const slateText = parts[0]?.replace(/-/g, ' ') || "NO SLATE";
         document.getElementById('slate').textContent = slateText;
-        document.getElementById('qrCodeSlate').textContent = slateText;
     
         // Display additional fields if they exist
         const scriptLocationText = parts[1]?.replace(/-/g, ' ') || "";
