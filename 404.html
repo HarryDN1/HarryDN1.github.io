@@ -210,7 +210,7 @@
 <body>
 
     <button id="toggleButton" onclick="toggleQRCode()">↔</button>
-    <button id="modeToggle" onclick="toggleMode()">SLATE</button>
+    <button id="modeToggle" onclick="toggleMode()">Slate Ref</button>
 
     <div id="textContainer">
         <p id="slate">Loading...</p>
@@ -242,7 +242,7 @@
         </div>
     </div>
 
-        <script>
+    <script>
         let currentMode = "SLATE";
     
         // Get the current URL
@@ -323,7 +323,7 @@
         // Function to toggle between SLATE and HDRI
         function toggleMode() {
             currentMode = (currentMode === "SLATE") ? "HDRI" : "SLATE";
-            document.getElementById('modeToggle').textContent = currentMode;
+            document.getElementById('modeToggle').textContent = currentMode === "SLATE" ? "Slate Ref" : currentMode;
             updateQRCode(); // Regenerate QR code
         }
     
