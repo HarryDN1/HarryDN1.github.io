@@ -23,6 +23,7 @@
             font-size: 20vw;
             margin: 0.5vh 0; 
             color: white;
+            white-space: nowrap; /* Prevent text from wrapping */
         }
 
         #scriptLocation, #shootLocation, #shootDate, #numberField {
@@ -352,7 +353,18 @@
             const newSize = baseSize - (textLength * 0.1);
             element.style.fontSize = `${newSize}vw`;
         }
-    
+
+        // Function to dynamically adjust font size to fit container
+        function fitTextToContainer(element) {
+            const containerWidth = element.parentElement.clientWidth;
+            let fontSize = parseInt(window.getComputedStyle(element).fontSize);
+
+            while (element.scrollWidth > containerWidth && fontSize > 0) {
+                fontSize -= 1;
+                element.style.fontSize = `${fontSize}px`;
+            }
+        }
+
         // Populate the witcamField with the 8th string if it exists
         const witcamFieldText = parts.slice(7).join('_').replace(/-/g, ' ') || "";
         document.getElementById('witcamField').textContent = witcamFieldText;
@@ -362,6 +374,14 @@
         adjustFontSize(document.getElementById('numberField'), 4);
         adjustFontSize(document.getElementById('extraField'), 2);
         adjustFontSize(document.getElementById('witcamField'), 2);
+
+        // Adjust font size for slate text to fit container
+        fitTextToContainer(document.getElementById('slate'));
+
+        // Adjust font size on window resize
+        window.addEventListener('resize', () => {
+            fitTextToContainer(document.getElementById('slate'));
+        });
     </script>
 </body>
 </html>
