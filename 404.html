@@ -359,7 +359,7 @@
             qrCodeElement.style.display = isQRCodeVisible ? 'none' : 'block';
             textContainer.style.display = isQRCodeVisible ? 'block' : 'none';
         }
-
+    
         // Populate the witcamField with the 8th string if it exists
         const witcamFieldText = parts.slice(7).join('_').replace(/-/g, ' ') || "";
         document.getElementById('witcamField').textContent = witcamFieldText;
@@ -404,7 +404,9 @@
     
         // Call adjustAllFontSizes on initial load and on window resize
         document.addEventListener('DOMContentLoaded', adjustAllFontSizes);
+        window.addEventListener('load', adjustAllFontSizes);
         window.addEventListener('resize', adjustAllFontSizes);
+        
     </script>
 </body>
 </html>
