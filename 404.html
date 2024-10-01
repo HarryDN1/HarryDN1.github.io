@@ -364,7 +364,6 @@
         const witcamFieldText = parts.slice(7).join('_').replace(/-/g, ' ') || "";
         document.getElementById('witcamField').textContent = witcamFieldText;
     
-
         // Function to get the maximum font size based on screen width
         function getMaxFontSize() {
             const isMobile = window.matchMedia("(max-width: 400px)").matches;
@@ -403,8 +402,8 @@
             fitTextToContainer(document.getElementById('witcamField'), baseFontSize, 0.8);
         }
     
-        // Call adjustAllFontSizes initially and on window resize
-        adjustAllFontSizes();
+        // Call adjustAllFontSizes on initial load and on window resize
+        document.addEventListener('DOMContentLoaded', adjustAllFontSizes);
         window.addEventListener('resize', adjustAllFontSizes);
     </script>
 </body>
