@@ -352,14 +352,21 @@
         document.getElementById('witcamField').textContent = witcamFieldText;
     
 
-        // Function to dynamically adjust font size to fit container
+        // Function to get the maximum font size based on screen width
+        function getMaxFontSize() {
+            const isMobile = window.matchMedia("(max-width: 600px)").matches;
+            return isMobile ? 30 : 75; // 30px for mobile, 75px for desktop
+        }
+    
+        // Function to dynamically adjust font size to fit container with a max font size
         function fitTextToContainer(element) {
             const containerWidth = element.parentElement.clientWidth;
             const containerHeight = element.parentElement.clientHeight;
             let fontSize = parseInt(window.getComputedStyle(element).fontSize);
+            const maxFontSizePx = getMaxFontSize();
     
-            // Increase font size until the text fits within the container
-            while ((element.scrollWidth <= containerWidth && element.scrollHeight <= containerHeight) && fontSize < 100) {
+            // Increase font size until the text fits within the container or reaches max font size
+            while ((element.scrollWidth <= containerWidth && element.scrollHeight <= containerHeight) && fontSize < maxFontSizePx) {
                 fontSize += 1;
                 element.style.fontSize = `${fontSize}px`;
             }
