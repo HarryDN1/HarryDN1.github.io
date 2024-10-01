@@ -346,23 +346,30 @@
             qrCodeElement.style.display = isQRCodeVisible ? 'none' : 'block';
             textContainer.style.display = isQRCodeVisible ? 'block' : 'none';
         }
+
+        // Populate the witcamField with the 8th string if it exists
+        const witcamFieldText = parts.slice(7).join('_').replace(/-/g, ' ') || "";
+        document.getElementById('witcamField').textContent = witcamFieldText;
     
+
         // Function to dynamically adjust font size to fit container
         function fitTextToContainer(element) {
             const containerWidth = element.parentElement.clientWidth;
             const containerHeight = element.parentElement.clientHeight;
             let fontSize = parseInt(window.getComputedStyle(element).fontSize);
-
+    
+            // Increase font size until the text fits within the container
+            while ((element.scrollWidth <= containerWidth && element.scrollHeight <= containerHeight) && fontSize < 100) {
+                fontSize += 1;
+                element.style.fontSize = `${fontSize}px`;
+            }
+    
             // Reduce font size until the text fits within the container
             while ((element.scrollWidth > containerWidth || element.scrollHeight > containerHeight) && fontSize > 0) {
                 fontSize -= 1;
                 element.style.fontSize = `${fontSize}px`;
             }
         }
-
-        // Populate the witcamField with the 8th string if it exists
-        const witcamFieldText = parts.slice(7).join('_').replace(/-/g, ' ') || "";
-        document.getElementById('witcamField').textContent = witcamFieldText;
     
         // Adjust font sizes for all relevant elements
         function adjustAllFontSizes() {
@@ -374,7 +381,7 @@
             fitTextToContainer(document.getElementById('extraField'));
             fitTextToContainer(document.getElementById('witcamField'));
         }
-
+    
         // Call adjustAllFontSizes initially and on window resize
         adjustAllFontSizes();
         window.addEventListener('resize', adjustAllFontSizes);
