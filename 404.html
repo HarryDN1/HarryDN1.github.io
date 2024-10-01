@@ -123,6 +123,10 @@
             flex-wrap: wrap;
         }
 
+        #currentState {
+            color:rgba(255, 140, 0, 0.902)
+        }
+
         #textContainer {
             display: none; 
         }
@@ -339,7 +343,10 @@
             qrCodeImage.src = `https://barcode.tec-it.com/barcode.ashx?data=${encodeURIComponent(qrCodeText)}&code=QRCode&unit=Px&dpi=500&imagetype=Jpg&qunit=Mm&quiet=10&dmsize=Default&eclevel=H&modulewidth=20`;
             
             // Set the current state text
-            document.getElementById('currentState').textContent = currentMode === "SLATE" ? "Slate Ref" : currentMode;
+            const currentStateElement = document.getElementById('currentState');
+            currentStateElement.textContent = currentMode === "SLATE" ? "Slate Ref Images" : currentMode;
+            currentStateElement.textContent = currentMode === "HDRI" ? "HDRI Images" : currentMode;
+            currentStateElement.style.color = currentMode === "SLATE" ? "rgba(255, 140, 0, 0.902)" : "rgba(0, 106, 255, 0.902)";
         }
     
         // Function to toggle between SLATE and HDRI
