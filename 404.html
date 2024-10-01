@@ -23,7 +23,7 @@
             font-size: 20vw;
             margin: 0.5vh 0; 
             color: white;
-            white-space: nowrap; /* Prevent text from wrapping */
+            white-space: nowrap;
         }
 
         #scriptLocation, #shootLocation, #shootDate, #numberField {
@@ -347,13 +347,6 @@
             textContainer.style.display = isQRCodeVisible ? 'block' : 'none';
         }
     
-        // Function to adjust font size based on text length
-        function adjustFontSize(element, baseSize) {
-            const textLength = element.textContent.length;
-            const newSize = baseSize - (textLength * 0.1);
-            element.style.fontSize = `${newSize}vw`;
-        }
-
         // Function to dynamically adjust font size to fit container
         function fitTextToContainer(element) {
             const containerWidth = element.parentElement.clientWidth;
@@ -370,12 +363,6 @@
         document.getElementById('witcamField').textContent = witcamFieldText;
     
         // Adjust font sizes
-        adjustFontSize(document.getElementById('shootDate'), 3);
-        adjustFontSize(document.getElementById('numberField'), 4);
-        adjustFontSize(document.getElementById('extraField'), 2);
-        adjustFontSize(document.getElementById('witcamField'), 2);
-
-        // Adjust font size for slate text to fit container
         fitTextToContainer(document.getElementById('slate'));
 
         // Adjust font size on window resize
