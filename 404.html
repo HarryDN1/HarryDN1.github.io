@@ -18,13 +18,15 @@
             font-family: Arial, sans-serif;
             text-align: center;
             position: relative;
-            overflow: hidden; 
+            overflow-x: hidden; 
+            overflow-y: auto;
         }
         
         #textContainer {
             width: 90%;
             height: 90%;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -400,9 +402,11 @@
             }
         }
     
-        // Adjust font sizes for all relevant elements
-        function adjustAllFontSizes() {
-            const baseFontSize = 100; // Base font size for #slate
+        // Function to adjust font sizes based on screen orientation
+        function adjustFontSizesForOrientation() {
+            const isLandscape = window.matchMedia("(orientation: landscape)").matches;
+            const baseFontSize = isLandscape ? 50 : 100; // Smaller base font size for landscape
+        
             fitTextToContainer(document.getElementById('slate'), baseFontSize, 1);
             fitTextToContainer(document.getElementById('scriptLocation'), baseFontSize, 0.6);
             fitTextToContainer(document.getElementById('shootLocation'), baseFontSize, 0.6);
@@ -411,12 +415,13 @@
             fitTextToContainer(document.getElementById('extraField'), baseFontSize, 0.5);
             fitTextToContainer(document.getElementById('witcamField'), baseFontSize, 0.6);
         }
-    
-        // Call adjustAllFontSizes on initial load and on window resize
-        document.addEventListener('DOMContentLoaded', adjustAllFontSizes);
+        
+        // Call adjustFontSizesForOrientation on initial load and on orientation change
+        document.addEventListener('DOMContentLoaded', adjustFontSizesForOrientation);
         window.addEventListener('load', adjustAllFontSizes);
-        window.addEventListener('resize', adjustAllFontSizes);
+        window.addEventListener('resize', adjustFontSizesForOrientation);
         
     </script>
 </body>
 </html>
+
