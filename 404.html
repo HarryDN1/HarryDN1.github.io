@@ -177,7 +177,7 @@
             background: rgba(0, 123, 255, 0.8);
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 500px) {
             #slate {
                 font-size: 30vw;
             }
@@ -207,15 +207,15 @@
             #toggleButton {
                 bottom: 8%; 
                 left: 1%;
-                width: 20;
-                height: 15;
+                width: 10;
+                height: 7;
             }
 
             #modeToggle {
                 bottom: 15%;
                 left: 1%;
-                width: 15;
-                height: 15;
+                width: 10;
+                height: 10;
             }
 
             #witcamField {
@@ -366,8 +366,8 @@
     
         // Function to get the maximum font size based on screen width
         function getMaxFontSize() {
-            const isMobile = window.matchMedia("(max-width: 400px)").matches;
-            return isMobile ? 18 : 65;
+            const isMobile = window.matchMedia("(max-width: 500px)").matches;
+            return isMobile ? 14 : 100;
         }
     
         // Function to dynamically adjust font size to fit container with a max font size
@@ -392,14 +392,14 @@
     
         // Adjust font sizes for all relevant elements
         function adjustAllFontSizes() {
-            const baseFontSize = 50; // Base font size for #slate
+            const baseFontSize = 100; // Base font size for #slate
             fitTextToContainer(document.getElementById('slate'), baseFontSize, 1);
-            fitTextToContainer(document.getElementById('scriptLocation'), baseFontSize, 0.8);
-            fitTextToContainer(document.getElementById('shootLocation'), baseFontSize, 0.8);
-            fitTextToContainer(document.getElementById('shootDate'), baseFontSize, 0.8);
-            fitTextToContainer(document.getElementById('numberField'), baseFontSize, 0.8);
-            fitTextToContainer(document.getElementById('extraField'), baseFontSize, 0.8);
-            fitTextToContainer(document.getElementById('witcamField'), baseFontSize, 0.8);
+            fitTextToContainer(document.getElementById('scriptLocation'), baseFontSize, 0.6);
+            fitTextToContainer(document.getElementById('shootLocation'), baseFontSize, 0.6);
+            fitTextToContainer(document.getElementById('shootDate'), baseFontSize, 0.6);
+            fitTextToContainer(document.getElementById('numberField'), baseFontSize, 0.6);
+            fitTextToContainer(document.getElementById('extraField'), baseFontSize, 0.6);
+            fitTextToContainer(document.getElementById('witcamField'), baseFontSize, 0.6);
         }
     
         // Call adjustAllFontSizes on initial load and on window resize
