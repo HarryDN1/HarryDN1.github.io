@@ -183,7 +183,7 @@
             }
 
             #scriptLocation, #shootLocation, #shootDate, #numberField {
-                font-size: 5.5vw;
+                font-size: 5vw;
                 margin: 0;
             }
 
@@ -370,7 +370,7 @@
         // Function to get the maximum font size based on screen width
         function getMaxFontSize() {
             const isMobile = window.matchMedia("(max-width: 500px)").matches;
-            return isMobile ? 14 : 100;
+            return isMobile ? 18 : 120;
         }
     
         // Function to dynamically adjust font size to fit container with a max font size
@@ -399,9 +399,9 @@
             fitTextToContainer(document.getElementById('slate'), baseFontSize, 1);
             fitTextToContainer(document.getElementById('scriptLocation'), baseFontSize, 0.6);
             fitTextToContainer(document.getElementById('shootLocation'), baseFontSize, 0.6);
-            fitTextToContainer(document.getElementById('shootDate'), baseFontSize, 0.6);
-            fitTextToContainer(document.getElementById('numberField'), baseFontSize, 0.6);
-            fitTextToContainer(document.getElementById('extraField'), baseFontSize, 0.6);
+            fitTextToContainer(document.getElementById('shootDate'), baseFontSize, 0.5);
+            fitTextToContainer(document.getElementById('numberField'), baseFontSize, 0.5);
+            fitTextToContainer(document.getElementById('extraField'), baseFontSize, 0.5);
             fitTextToContainer(document.getElementById('witcamField'), baseFontSize, 0.6);
         }
     
