@@ -350,9 +350,11 @@
         // Function to dynamically adjust font size to fit container
         function fitTextToContainer(element) {
             const containerWidth = element.parentElement.clientWidth;
+            const containerHeight = element.parentElement.clientHeight;
             let fontSize = parseInt(window.getComputedStyle(element).fontSize);
 
-            while (element.scrollWidth > containerWidth && fontSize > 0) {
+            // Reduce font size until the text fits within the container
+            while ((element.scrollWidth > containerWidth || element.scrollHeight > containerHeight) && fontSize > 0) {
                 fontSize -= 1;
                 element.style.fontSize = `${fontSize}px`;
             }
@@ -362,13 +364,20 @@
         const witcamFieldText = parts.slice(7).join('_').replace(/-/g, ' ') || "";
         document.getElementById('witcamField').textContent = witcamFieldText;
     
-        // Adjust font sizes
-        fitTextToContainer(document.getElementById('slate'));
-
-        // Adjust font size on window resize
-        window.addEventListener('resize', () => {
+        // Adjust font sizes for all relevant elements
+        function adjustAllFontSizes() {
             fitTextToContainer(document.getElementById('slate'));
-        });
+            fitTextToContainer(document.getElementById('scriptLocation'));
+            fitTextToContainer(document.getElementById('shootLocation'));
+            fitTextToContainer(document.getElementById('shootDate'));
+            fitTextToContainer(document.getElementById('numberField'));
+            fitTextToContainer(document.getElementById('extraField'));
+            fitTextToContainer(document.getElementById('witcamField'));
+        }
+
+        // Call adjustAllFontSizes initially and on window resize
+        adjustAllFontSizes();
+        window.addEventListener('resize', adjustAllFontSizes);
     </script>
 </body>
 </html>
