@@ -177,17 +177,18 @@
             background: rgba(0, 123, 255, 0.8);
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 400px) {
             #slate {
                 font-size: 30vw;
             }
 
             #scriptLocation, #shootLocation, #shootDate, #numberField {
-                font-size: 6.5vw;
+                font-size: 5.5vw;
+                margin: 0;
             }
 
             #extraField {
-                font-size: 4vw;
+                font-size: 3.5vw;
             }
 
             #qrCode {
@@ -366,39 +367,40 @@
 
         // Function to get the maximum font size based on screen width
         function getMaxFontSize() {
-            const isMobile = window.matchMedia("(max-width: 600px)").matches;
-            return isMobile ? 14 : 40; // 14px for mobile, 40px for desktop
+            const isMobile = window.matchMedia("(max-width: 400px)").matches;
+            return isMobile ? 12 : 30;
         }
     
         // Function to dynamically adjust font size to fit container with a max font size
-        function fitTextToContainer(element) {
+        function fitTextToContainer(element, baseFontSize, scaleFactor) {
             const containerWidth = element.parentElement.clientWidth;
             const containerHeight = element.parentElement.clientHeight;
-            let fontSize = parseInt(window.getComputedStyle(element).fontSize);
+            let fontSize = baseFontSize;
             const maxFontSizePx = getMaxFontSize();
     
             // Increase font size until the text fits within the container or reaches max font size
             while ((element.scrollWidth <= containerWidth && element.scrollHeight <= containerHeight) && fontSize < maxFontSizePx) {
                 fontSize += 1;
-                element.style.fontSize = `${fontSize}px`;
+                element.style.fontSize = `${fontSize * scaleFactor}px`;
             }
     
             // Reduce font size until the text fits within the container
             while ((element.scrollWidth > containerWidth || element.scrollHeight > containerHeight) && fontSize > 0) {
                 fontSize -= 1;
-                element.style.fontSize = `${fontSize}px`;
+                element.style.fontSize = `${fontSize * scaleFactor}px`;
             }
         }
     
         // Adjust font sizes for all relevant elements
         function adjustAllFontSizes() {
-            fitTextToContainer(document.getElementById('slate'));
-            fitTextToContainer(document.getElementById('scriptLocation'));
-            fitTextToContainer(document.getElementById('shootLocation'));
-            fitTextToContainer(document.getElementById('shootDate'));
-            fitTextToContainer(document.getElementById('numberField'));
-            fitTextToContainer(document.getElementById('extraField'));
-            fitTextToContainer(document.getElementById('witcamField'));
+            const baseFontSize = 18; // Base font size for #slate
+            fitTextToContainer(document.getElementById('slate'), baseFontSize, 1);
+            fitTextToContainer(document.getElementById('scriptLocation'), baseFontSize, 0.8);
+            fitTextToContainer(document.getElementById('shootLocation'), baseFontSize, 0.8);
+            fitTextToContainer(document.getElementById('shootDate'), baseFontSize, 0.8);
+            fitTextToContainer(document.getElementById('numberField'), baseFontSize, 0.8);
+            fitTextToContainer(document.getElementById('extraField'), baseFontSize, 0.8);
+            fitTextToContainer(document.getElementById('witcamField'), baseFontSize, 0.8);
         }
     
         // Call adjustAllFontSizes initially and on window resize
