@@ -358,6 +358,9 @@
     
             qrCodeElement.style.display = isQRCodeVisible ? 'none' : 'block';
             textContainer.style.display = isQRCodeVisible ? 'block' : 'none';
+
+            // fix font size issue when switching between QR code and text
+            adjustAllFontSizes();
         }
     
         // Populate the witcamField with the 8th string if it exists
