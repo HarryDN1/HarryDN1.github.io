@@ -124,7 +124,7 @@
         }
 
         #currentState {
-            color:rgba(255, 140, 0, 0.902)
+            color:rgba(0, 166, 255, 0.902)
         }
 
         #textContainer {
@@ -346,13 +346,13 @@
             const currentStateElement = document.getElementById('currentState');
             currentStateElement.textContent = currentMode === "SLATE" ? "Slate Ref Images" : currentMode;
             currentStateElement.textContent = currentMode === "HDRI" ? "HDRI Images" : currentMode;
-            currentStateElement.style.color = currentMode === "SLATE" ? "rgba(255, 140, 0, 0.902)" : "rgba(0, 106, 255, 0.902)";
+            currentStateElement.style.color = currentMode === "SLATE" ? "rgba(255, 140, 0, 0.902)" : "rgba(0, 166, 255, 1)";
         }
     
         // Function to toggle between SLATE and HDRI
         function toggleMode() {
             currentMode = (currentMode === "SLATE") ? "HDRI" : "SLATE";
-            document.getElementById('modeToggle').textContent = currentMode === "SLATE" ? "Slate Ref" : currentMode;
+            document.getElementById('modeToggle').textContent = currentMode === "SLATE" ? "Slate Ref Images" : currentMode;
             updateQRCode(); // Regenerate QR code
         }
     
