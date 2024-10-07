@@ -266,11 +266,11 @@
             }
 
             #takeInput {
-                font-size: 5vw;
+                font-size: 6vw;
             }
 
             #takeEntry {
-                font-size: 6.5vw;
+                font-size: 10.5vw;
             }
         }
 
@@ -295,7 +295,7 @@
             <p id="extraField"></p>
             <p id="witcamField"></p>
         </div>
-        <div id="takeEntry">
+        <div id="takeEntry" style="display: none;">
             <label for="takeInput">Take:</label>
             <input type="number" id="takeInput" name="takeInput" min="1" />
         </div>
@@ -420,6 +420,14 @@
         // Populate the witcamField with the 8th string if it exists
         const witcamFieldText = parts.slice(7).join('_').replace(/-/g, ' ') || "";
         document.getElementById('witcamField').textContent = witcamFieldText;
+
+       // Conditionally display the takeEntry field based on the content of witcamField
+        const takeEntry = document.getElementById('takeEntry');
+        if (witcamFieldText) {
+            takeEntry.style.display = 'flex';
+        } else {
+            takeEntry.style.display = 'none';
+        } 
     
         // Function to get the maximum font size based on screen width
         function getMaxFontSize() {
