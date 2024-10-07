@@ -195,6 +195,22 @@
             background: rgba(0, 123, 255, 0.8);
         }
 
+        #takeEntry {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1vw;
+            font-size: 2vw;
+            color: white;
+        }
+        
+        #takeInput {
+            margin-left: 0.5vw;
+            font-size: 2vw;
+            width: 5vw;
+            text-align: center;
+        }
+
         @media (max-width: 500px) {
             #slate {
                 font-size: 30vw;
@@ -270,6 +286,10 @@
             </div>
             <p id="extraField"></p>
             <p id="witcamField"></p>
+        </div>
+        <div id="takeEntry">
+            <label for="takeInput">Take:</label>
+            <input type="number" id="takeInput" name="takeInput" min="1" />
         </div>
     </div>
     <div id="qrCode">
