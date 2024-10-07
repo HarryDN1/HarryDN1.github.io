@@ -266,11 +266,11 @@
             }
 
             #takeInput {
-                font-size: 6vw;
+                font-size: 5.5vw;
             }
 
             #takeEntry {
-                font-size: 10.5vw;
+                font-size: 15.5vw;
             }
         }
 
@@ -471,6 +471,23 @@
         document.addEventListener('DOMContentLoaded', adjustAllFontSizes);
         window.addEventListener('load', adjustAllFontSizes);
         window.addEventListener('resize', adjustAllFontSizes);
+
+        // Function to make text fields editable
+        function makeTextFieldsEditable() {
+            const textFields = document.querySelectorAll('#textContainer p');
+            textFields.forEach(field => {
+                field.setAttribute('contenteditable', 'true');
+                field.addEventListener('focus', () => {
+                    field.style.outline = '2px solid #00f';
+                });
+                field.addEventListener('blur', () => {
+                    field.style.outline = 'none'; // Remove the visual indicator when the field loses focus
+                });
+            });
+        }
+        
+        // Call makeTextFieldsEditable on initial load
+        document.addEventListener('DOMContentLoaded', makeTextFieldsEditable);
         
     </script>
 </body>
