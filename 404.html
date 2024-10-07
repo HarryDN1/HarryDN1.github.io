@@ -266,11 +266,11 @@
             }
 
             #takeInput {
-                font-size: 5.5vw;
+                font-size: 10.5vw;
             }
 
             #takeEntry {
-                font-size: 15.5vw;
+                font-size: 7.5vw;
             }
         }
 
@@ -477,6 +477,7 @@
             const textFields = document.querySelectorAll('#textContainer p');
             textFields.forEach(field => {
                 field.setAttribute('contenteditable', 'true');
+                field.setAttribute('spellcheck', 'false');
                 field.addEventListener('focus', () => {
                     field.style.outline = '2px solid #00f';
                 });
