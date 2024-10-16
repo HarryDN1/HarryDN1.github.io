@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
     <title>Slate</title>
     <style>
         body {
@@ -304,7 +305,7 @@
     <div id="qrCode">
         <p id="qrCodeSlate"></p> 
         <div id="qrcode">
-            <img id="qrCodeImage" alt="QR Generator" src="" />
+            <div id="qrcode"></div>
             <p id="currentState"></p>
         </div> 
         <div id="qrCodeDetails">
@@ -382,13 +383,15 @@
             const formattedPath = path.replace(/\+\+/g, '_');
             const parts = formattedPath.split('_');
             const endString = currentMode;
-    
+        
             // Build the QR code text
             const qrCodeText = `${formattedPath}_${endString}`;
-    
-            // Set the src attribute of the QR code image
-            const qrCodeImage = document.getElementById("qrCodeImage");
-            qrCodeImage.src = `https://barcode.tec-it.com/barcode.ashx?data=${encodeURIComponent(qrCodeText)}&code=QRCode&unit=Px&dpi=300&imagetype=Jpg&qunit=Mm&quiet=10&dmsize=Default&eclevel=H&modulewidth=20`;
+        
+            // Generate the QR code
+            QRCode.toCanvas(document.getElementById('qrcode'), qrCodeText, { width: 300 }, function (error) {
+                if (error) console.error(error);
+                console.log('QR code generated!');
+            });
             
             // Set the current state text
             const currentStateElement = document.getElementById('currentState');
