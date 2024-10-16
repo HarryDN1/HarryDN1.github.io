@@ -234,8 +234,8 @@
                 max-width: none;
             }
 
-            #qrCode img {
-                width: 90%;
+            #qrCodeImg {
+                width: 85vw;
             }
 
             #shootDate {
@@ -304,7 +304,7 @@
     </div>
     <div id="qrCode">
         <p id="qrCodeSlate"></p> 
-        <canvas id="qrcode"></canvas>
+        <canvas id="qrCodeImg"></canvas>
         <p id="currentState"></p>
         <div id="qrCodeDetails">
             <p id="qrCodeScriptLocation"></p>
@@ -386,7 +386,7 @@
             const qrCodeText = `${formattedPath}_${endString}`;
         
             // Generate the QR code
-            QRCode.toCanvas(document.getElementById('qrcode'), qrCodeText, { width: 300 }, function (error) {
+            QRCode.toCanvas(document.getElementById('qrCodeImg'), qrCodeText, { width: 500 }, function (error) {
                 if (error) console.error(error);
                 console.log('QR code generated!');
             });
