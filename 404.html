@@ -386,7 +386,7 @@
             const qrCodeText = `${formattedPath}_${endString}`;
         
             // Generate the QR code
-            QRCode.toCanvas(document.getElementById('qrCodeImg'), qrCodeText, { width: 500 }, function (error) {
+            QRCode.toCanvas(document.getElementById('qrCodeImg'), qrCodeText, { width: 350 }, function (error) {
                 if (error) console.error(error);
                 console.log('QR code generated!');
             });
