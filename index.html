@@ -65,6 +65,11 @@
             cursor: pointer;
         }
 
+        .warning {
+            color: red;
+            margin-top: 10px;
+        }
+
         @media (max-width: 600px) {
             h1 {
                 font-size: 6vw;
@@ -94,7 +99,7 @@
         </div>
         <div class="dropdown-title">Photo Type</div>
         <div class="dropdown">
-            <select id="typeInput">
+            <select id="typeInput" required>
                 <option value="" disabled selected>Select Type</option>
                 <option value="HDRI">HDRI</option>
                 <option value="Slate Ref">Slate Ref</option>
@@ -113,9 +118,11 @@
         </div>
         <div class="dropdown-title">Tail Slate</div>
         <div class="input-row">
-            <input type="text" id="tailInput" placeholder="true/false">
+            <input type="checkbox" id="tailInput">
+            <label for="tailInput">Tail Slate</label>
         </div>
         <button class="button" onclick="generateQRCode()">Generate QR</button>
+        <div class="warning" id="warningMessage" style="display: none;">Please select a Photo Type</div>
     </div>
 
     <div id="qrContainer" style="display: none;">
@@ -142,7 +149,12 @@
             const location = document.getElementById('locationInput').value;
             const type = document.getElementById('typeInput').value;
             const unit = document.getElementById('unitInput').value;
-            const tail = document.getElementById('tailInput').value;
+            const tail = document.getElementById('tailInput').checked ? 'true' : 'false';
+
+            if (!type) {
+                document.getElementById('warningMessage').style.display = 'block';
+                return;
+            }
 
             const qrCodeText = `$(version)[1.0]$(type)[${type}]$(slate)[${slate}]$(unt)[${unit}]$(loc)[${location}]$(tail)[${tail}]`;
 
@@ -164,6 +176,8 @@
         function showInputContainer() {
             document.getElementById('inputContainer').style.display = 'block';
             document.getElementById('qrContainer').style.display = 'none';
+            document.getElementById('warningMessage').style.display = 'none';
+            document.getElementById('typeInput').value = '';
         }
     </script>
 
