@@ -111,6 +111,10 @@
                 <option value="2U">2U</option>
             </select>
         </div>
+        <div class="dropdown-title">Tail Slate</div>
+        <div class="input-row">
+            <input type="text" id="tailInput" placeholder="true/false">
+        </div>
         <button class="button" onclick="generateQRCode()">Generate QR</button>
     </div>
 
@@ -138,8 +142,9 @@
             const location = document.getElementById('locationInput').value;
             const type = document.getElementById('typeInput').value;
             const unit = document.getElementById('unitInput').value;
+            const tail = document.getElementById('tailInput').value;
 
-            const qrCodeText = `$(version)[1.0]$(type)[${type}]$(slate)[${slate}]$(unt)[${unit}]$(loc)[${location}]`;
+            const qrCodeText = `$(version)[1.0]$(type)[${type}]$(slate)[${slate}]$(unt)[${unit}]$(loc)[${location}]$(tail)[${tail}]`;
 
             QRCode.toCanvas(document.getElementById('qrCodeImg'), qrCodeText, { width: 350 }, function (error) {
                 if (error) console.error(error);
