@@ -18,7 +18,7 @@
         }
 
         h1 {
-            font-size: 3vw;
+            font-size: 4.2vw;
             margin: 0 0 20px 0;
         }
 
@@ -31,35 +31,35 @@
         .input-row {
             display: flex;
             justify-content: center;
-            margin-bottom: 10px;
+            margin-bottom: 14px;
         }
 
-        .input-row input {
-            margin: 0 10px;
-            padding: 10px;
-            font-size: 1vw;
+        .input-row input, .input-row select {
+            margin: 0 14px;
+            padding: 14px;
+            font-size: 1.4vw;
         }
 
         .dropdown {
-            margin-top: 20px;
+            margin-top: 28px;
         }
 
         .dropdown select {
-            padding: 10px;
-            font-size: 1vw;
+            padding: 14px;
+            font-size: 1.4vw;
         }
 
         @media (max-width: 600px) {
             h1 {
-                font-size: 6vw;
+                font-size: 8.4vw;
             }
 
-            .input-row input {
-                font-size: 3vw;
+            .input-row input, .input-row select {
+                font-size: 4.2vw;
             }
 
             .dropdown select {
-                font-size: 3vw;
+                font-size: 4.2vw;
             }
         }
     </style>
@@ -73,11 +73,19 @@
             <input type="text" placeholder="Slate">
         </div>
         <div class="input-row">
-            <input type="text" placeholder="Unit/Shoot Day">
+            <select>
+                <option value="" disabled selected>Select Unit</option>
+                <option value="MU">MU</option>
+                <option value="2U">2U</option>
+            </select>
+            <input type="text" placeholder="Shoot Day">
+        </div>
+        <div class="input-row">
             <input type="text" placeholder="Location">
         </div>
         <div class="dropdown">
             <select>
+                <option value="" disabled selected>Select Option</option>
                 <option value="HDRI">HDRI</option>
                 <option value="Slate Ref">Slate Ref</option>
                 <option value="Set Ref">Set Ref</option>
