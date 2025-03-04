@@ -72,8 +72,8 @@
 
         .button {
             margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1.2vw;
+            padding: 20px 40px;
+            font-size: 2.4vw;
             background-color: white;
             color: black;
             border: none;
@@ -184,13 +184,15 @@
                 <input type="text" id="assetNameInput" placeholder="Asset Name/Ref Name">
             </div>
         </div>
-        <div class="dropdown-title">Select Unit</div>
-        <div class="dropdown">
-            <select id="unitInput">
-                <option value="" disabled selected>Select Unit</option>
-                <option value="MU">MU</option>
-                <option value="2U">2U</option>
-            </select>
+        <div id="unitSelection">
+            <div class="dropdown-title">Select Unit</div>
+            <div class="dropdown">
+                <select id="unitInput">
+                    <option value="" disabled selected>Select Unit</option>
+                    <option value="MU">MU</option>
+                    <option value="2U">2U</option>
+                </select>
+            </div>
         </div>
         <div class="tail-slate-container">
             <input type="checkbox" id="tailInput">
@@ -221,15 +223,16 @@
             if (version === '3' || version === '4') {
                 document.getElementById('standardInputs').style.display = 'none';
                 document.getElementById('assetInput').style.display = 'block';
+                document.getElementById('unitSelection').style.display = 'none';
             } else {
                 document.getElementById('standardInputs').style.display = 'block';
                 document.getElementById('assetInput').style.display = 'none';
+                document.getElementById('unitSelection').style.display = 'block';
             }
         }
 
         function generateQRCode() {
             const version = document.getElementById('versionInput').value;
-            const unit = document.getElementById('unitInput').value;
             const tail = document.getElementById('tailInput').checked ? 'true' : 'false';
 
             if (!version) {
@@ -237,7 +240,7 @@
                 return;
             }
 
-            let qrCodeText = `$(version)${version}$(unt)${unit}$(tail)${tail}`;
+            let qrCodeText = `$(version)${version}$(tail)${tail}`;
 
             if (version === '3' || version === '4') {
                 const assetName = document.getElementById('assetNameInput').value;
@@ -245,11 +248,12 @@
                 document.getElementById('qrCodeSlate').textContent = assetName;
                 document.getElementById('qrCodeAssetName').textContent = assetName;
             } else {
+                const unit = document.getElementById('unitInput').value;
                 const scene = document.getElementById('sceneInput').value;
                 const slate = document.getElementById('slateInput').value;
                 const shootDay = document.getElementById('shootDayInput').value;
                 const location = document.getElementById('locationInput').value;
-                qrCodeText += `$(scene)${scene}$(slate)${slate}$(shootDay)${shootDay}$(loc)${location}`;
+                qrCodeText += `$(unt)${unit}$(scene)${scene}$(slate)${slate}$(shootDay)${shootDay}$(loc)${location}`;
                 document.getElementById('qrCodeSlate').textContent = slate;
                 document.getElementById('qrCodeScriptLocation').textContent = scene;
                 document.getElementById('qrCodeShootLocation').textContent = location;
