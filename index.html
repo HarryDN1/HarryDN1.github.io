@@ -31,8 +31,7 @@
 
         .input-row {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
             margin-bottom: 10px;
         }
 
@@ -51,7 +50,7 @@
         .input-label {
             color: #333;
             font-size: 0.8vw;
-            margin-top: 5px;
+            margin-bottom: 5px;
         }
 
         .dropdown {
@@ -73,8 +72,8 @@
 
         .button {
             margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1.2vw;
+            padding: 30px 60px;
+            font-size: 3.6vw;
             background-color: white;
             color: black;
             border: none;
@@ -131,6 +130,10 @@
                 font-size: 3vw;
             }
         }
+
+        .tail-slate-container {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -150,26 +153,30 @@
         </div>
         <div id="standardInputs">
             <div class="input-row">
-                <input type="text" id="sceneInput" placeholder="Scene">
-                <div class="input-label scene-color">Scene</div>
+                <div>
+                    <div class="input-label scene-color">Scene</div>
+                    <input type="text" id="sceneInput" placeholder="Scene">
+                </div>
+                <div>
+                    <div class="input-label slate-color">Slate</div>
+                    <input type="text" id="slateInput" placeholder="Slate">
+                </div>
             </div>
             <div class="input-row">
-                <input type="text" id="slateInput" placeholder="Slate">
-                <div class="input-label slate-color">Slate</div>
-            </div>
-            <div class="input-row">
-                <input type="text" id="shootDayInput" placeholder="Shoot Day">
-                <div class="input-label shootday-color">Shoot Day</div>
-            </div>
-            <div class="input-row">
-                <input type="text" id="locationInput" placeholder="Location">
-                <div class="input-label location-color">Location</div>
+                <div>
+                    <div class="input-label shootday-color">Shoot Day</div>
+                    <input type="text" id="shootDayInput" placeholder="Shoot Day">
+                </div>
+                <div>
+                    <div class="input-label location-color">Location</div>
+                    <input type="text" id="locationInput" placeholder="Location">
+                </div>
             </div>
         </div>
         <div id="assetInput" style="display: none;">
             <div class="input-row">
-                <input type="text" id="assetNameInput" placeholder="Asset Name/Ref Name">
                 <div class="input-label asset-color">Asset Name/Ref Name</div>
+                <input type="text" id="assetNameInput" placeholder="Asset Name/Ref Name">
             </div>
         </div>
         <div class="dropdown-title">Select Unit</div>
@@ -180,7 +187,7 @@
                 <option value="2U">2U</option>
             </select>
         </div>
-        <div class="input-row">
+        <div class="tail-slate-container">
             <input type="checkbox" id="tailInput">
             <label for="tailInput">Tail Slate</label>
         </div>
