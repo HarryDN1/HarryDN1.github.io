@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onset Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
     <style>
         body {
             margin: 0;
@@ -34,7 +35,7 @@
             margin-bottom: 10px;
         }
 
-        .input-row input {
+        .input-row input, .input-row select {
             margin: 0 10px;
             padding: 10px;
             font-size: 1vw;
@@ -69,7 +70,7 @@
                 font-size: 6vw;
             }
 
-            .input-row input {
+            .input-row input, .input-row select {
                 font-size: 3vw;
             }
 
@@ -81,20 +82,20 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="container" id="inputContainer">
         <h1>Onset Data</h1>
         <div class="input-row">
-            <input type="text" placeholder="Scene">
-            <input type="text" placeholder="Slate">
+            <input type="text" id="sceneInput" placeholder="Scene">
+            <input type="text" id="slateInput" placeholder="Slate">
         </div>
         <div class="input-row">
-            <input type="text" placeholder="Shoot Day">
-            <input type="text" placeholder="Location">
+            <input type="text" id="shootDayInput" placeholder="Shoot Day">
+            <input type="text" id="locationInput" placeholder="Location">
         </div>
-        <div class="dropdown-title">Select Option</div>
+        <div class="dropdown-title">Photo Type</div>
         <div class="dropdown">
-            <select>
-                <option value="" disabled selected>Select Option</option>
+            <select id="typeInput">
+                <option value="" disabled selected>Select Type</option>
                 <option value="HDRI">HDRI</option>
                 <option value="Slate Ref">Slate Ref</option>
                 <option value="Set Ref">Set Ref</option>
@@ -104,14 +105,62 @@
         </div>
         <div class="dropdown-title">Select Unit</div>
         <div class="dropdown">
-            <select>
+            <select id="unitInput">
                 <option value="" disabled selected>Select Unit</option>
                 <option value="MU">MU</option>
                 <option value="2U">2U</option>
             </select>
         </div>
-        <button class="button">Generate QR</button>
+        <button class="button" onclick="generateQRCode()">Generate QR</button>
     </div>
+
+    <div id="qrContainer" style="display: none;">
+        <div id="qrCode">
+            <p id="qrCodeSlate"></p>
+            <canvas id="qrCodeImg"></canvas>
+            <p id="currentState"></p>
+            <div id="qrCodeDetails">
+                <p id="qrCodeScriptLocation"></p>
+                <p id="qrCodeShootLocation"></p>
+                <p id="qrCodeShootDate"></p>
+                <p id="qrCodeNumberField"></p>
+                <p id="qrCodeExtraField"></p>
+            </div>
+        </div>
+        <button class="button" onclick="showInputContainer()">New Input</button>
+    </div>
+
+    <script>
+        function generateQRCode() {
+            const scene = document.getElementById('sceneInput').value;
+            const slate = document.getElementById('slateInput').value;
+            const shootDay = document.getElementById('shootDayInput').value;
+            const location = document.getElementById('locationInput').value;
+            const type = document.getElementById('typeInput').value;
+            const unit = document.getElementById('unitInput').value;
+
+            const qrCodeText = `$(version)[1.0]$(type)[${type}]$(slate)[${slate}]$(unt)[${unit}]$(loc)[${location}]`;
+
+            QRCode.toCanvas(document.getElementById('qrCodeImg'), qrCodeText, { width: 350 }, function (error) {
+                if (error) console.error(error);
+                console.log('QR code generated!');
+            });
+
+            document.getElementById('qrCodeSlate').textContent = slate;
+            document.getElementById('qrCodeScriptLocation').textContent = scene;
+            document.getElementById('qrCodeShootLocation').textContent = location;
+            document.getElementById('qrCodeShootDate').textContent = shootDay;
+            document.getElementById('currentState').textContent = type;
+
+            document.getElementById('inputContainer').style.display = 'none';
+            document.getElementById('qrContainer').style.display = 'block';
+        }
+
+        function showInputContainer() {
+            document.getElementById('inputContainer').style.display = 'block';
+            document.getElementById('qrContainer').style.display = 'none';
+        }
+    </script>
 
 </body>
 </html>
