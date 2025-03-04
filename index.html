@@ -194,7 +194,7 @@
                 </select>
             </div>
         </div>
-        <div class="tail-slate-container">
+        <div class="tail-slate-container" id="tailSlateContainer">
             <input type="checkbox" id="tailInput">
             <label for="tailInput">Tail Slate</label>
         </div>
@@ -204,14 +204,14 @@
 
     <div id="qrContainer" style="display: none;">
         <div id="qrCode">
-            <p id="qrCodeSlate" class="output-text slate-color"></p>
+            <p class="output-text slate-color">Slate: <span id="qrCodeSlate"></span></p>
             <canvas id="qrCodeImg"></canvas>
-            <p id="currentState" class="output-text"></p>
+            <p class="output-text">Version: <span id="currentState"></span></p>
             <div id="qrCodeDetails">
-                <p id="qrCodeScriptLocation" class="output-text scene-color"></p>
-                <p id="qrCodeShootLocation" class="output-text location-color"></p>
-                <p id="qrCodeShootDate" class="output-text shootday-color"></p>
-                <p id="qrCodeAssetName" class="output-text asset-color"></p>
+                <p class="output-text scene-color">Scene: <span id="qrCodeScriptLocation"></span></p>
+                <p class="output-text location-color">Location: <span id="qrCodeShootLocation"></span></p>
+                <p class="output-text shootday-color">Shoot Day: <span id="qrCodeShootDate"></span></p>
+                <p class="output-text asset-color">Asset Name/Ref Name: <span id="qrCodeAssetName"></span></p>
             </div>
         </div>
         <button class="button" onclick="showInputContainer()">New Input</button>
@@ -224,20 +224,31 @@
                 document.getElementById('standardInputs').style.display = 'none';
                 document.getElementById('assetInput').style.display = 'block';
                 document.getElementById('unitSelection').style.display = 'none';
+                document.getElementById('tailSlateContainer').style.display = 'block';
+            } else if (version === '5') {
+                document.getElementById('standardInputs').style.display = 'block';
+                document.getElementById('assetInput').style.display = 'none';
+                document.getElementById('unitSelection').style.display = 'block';
+                document.getElementById('tailSlateContainer').style.display = 'none';
             } else {
                 document.getElementById('standardInputs').style.display = 'block';
                 document.getElementById('assetInput').style.display = 'none';
                 document.getElementById('unitSelection').style.display = 'block';
+                document.getElementById('tailSlateContainer').style.display = 'block';
             }
         }
 
         function generateQRCode() {
             const version = document.getElementById('versionInput').value;
-            const tail = document.getElementById('tailInput').checked ? 'true' : 'false';
+            let tail = document.getElementById('tailInput').checked ? 'true' : 'false';
 
             if (!version) {
                 document.getElementById('warningMessage').style.display = 'block';
                 return;
+            }
+
+            if (version === '5') {
+                tail = 'true';
             }
 
             let qrCodeText = `$(version)${version}$(tail)${tail}`;
@@ -253,14 +264,14 @@
                 const slate = document.getElementById('slateInput').value;
                 const shootDay = document.getElementById('shootDayInput').value;
                 const location = document.getElementById('locationInput').value;
-                qrCodeText += `$(unt)${unit}$(scene)${scene}$(slate)${slate}$(shootDay)${shootDay}$(loc)${location}`;
+                qrCodeText += `$(unt)${unit}$(scn)${scene}$(slt)${slate}$(SD)${shootDay}$(loc)${location}`;
                 document.getElementById('qrCodeSlate').textContent = slate;
                 document.getElementById('qrCodeScriptLocation').textContent = scene;
                 document.getElementById('qrCodeShootLocation').textContent = location;
                 document.getElementById('qrCodeShootDate').textContent = shootDay;
             }
 
-            QRCode.toCanvas(document.getElementById('qrCodeImg'), qrCodeText, { width: 350 }, function (error) {
+            QRCode.toCanvas(document.getElementById('qrCodeImg'), qrCodeText, { width: 375 }, function (error) {
                 if (error) console.error(error);
                 console.log('QR code generated!');
             });
