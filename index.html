@@ -265,7 +265,15 @@
                 console.log('QR code generated!');
             });
 
-            document.getElementById('currentState').textContent = version;
+            const versionText = {
+                '1': 'Slate Ref',
+                '2': 'Set Ref',
+                '3': 'Texture Ref',
+                '4': 'Photogrammetry',
+                '5': 'HDRI'
+            };
+
+            document.getElementById('currentState').textContent = versionText[version];
 
             document.getElementById('inputContainer').style.display = 'none';
             document.getElementById('qrContainer').style.display = 'block';
