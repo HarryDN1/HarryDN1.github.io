@@ -149,6 +149,10 @@
         .qr-slate-text {
             font-size: 3vw;
         }
+
+        .qr-container .qr-slate-text {
+            font-size: 6vw;
+        }
     </style>
 </head>
 <body>
@@ -212,7 +216,7 @@
         <div class="warning" id="warningMessage" style="display: none;">Please select a Version</div>
     </div>
 
-    <div id="qrContainer" style="display: none;">
+    <div class="container qr-container" id="qrContainer" style="display: none;">
         <div id="qrCode">
             <p class="output-text qr-slate-text slate-color">Slate: <span id="qrCodeSlate"></span></p>
             <canvas id="qrCodeImg"></canvas>
