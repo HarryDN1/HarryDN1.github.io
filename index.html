@@ -131,13 +131,13 @@
             }
 
             .qr-slate-text {
-                font-size: 5vw;
+                font-size: 4vw;
                 padding-bottom: 1%;
                 color: #4682b4;
             }
 
             .qr-container .qr-slate-text {
-                font-size: 30vw;
+                font-size: 25vw;
             }
         }
 
@@ -160,8 +160,8 @@
 
         .invert-colors {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 25%;
+            right: 10px;
         }
     </style>
 </head>
@@ -237,7 +237,6 @@
     <div class="container qr-container" id="qrContainer" style="display: none;">
         <div id="qrCode">
             <canvas id="qrCodeImg"></canvas>
-            <p class="output-text qr-slate-text slate-color">Slate: <span id="qrCodeSlate"></span></p>
             <p class="output-text">Version: <span id="currentState"></span></p>
             <div id="qrCodeDetails">
                 <p class="output-text scene-color">Scene: <span id="qrCodeScriptLocation"></span></p>
@@ -245,6 +244,7 @@
                 <p class="output-text shootday-color">Shoot Day: <span id="qrCodeShootDate"></span></p>
                 <p class="output-text asset-color">Asset Name/Ref Name: <span id="qrCodeAssetName"></span></p>
             </div>
+            <p class="output-text qr-slate-text slate-color">Slate: <span id="qrCodeSlate"></span></p>
         </div>
         <button class="button" onclick="showInputContainer()">New Input</button>
     </div>
@@ -334,12 +334,22 @@
             if (isChecked) {
                 document.body.style.backgroundColor = 'white';
                 document.body.style.color = 'black';
+                document.querySelectorAll('input, select').forEach(el => {
+                    el.style.backgroundColor = 'white';
+                    el.style.color = 'black';
+                    el.style.border = '1px solid #555';
+                });
                 document.querySelectorAll('*').forEach(el => {
                     el.style.color = 'black';
                 });
             } else {
                 document.body.style.backgroundColor = 'black';
                 document.body.style.color = 'white';
+                document.querySelectorAll('input, select').forEach(el => {
+                    el.style.backgroundColor = '#333';
+                    el.style.color = 'white';
+                    el.style.border = '1px solid #555';
+                });
                 document.querySelectorAll('*').forEach(el => {
                     el.style.color = '';
                 });
