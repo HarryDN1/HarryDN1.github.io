@@ -137,7 +137,7 @@
             }
 
             .qr-container .qr-slate-text {
-            font-size: 30vw;
+                font-size: 30vw;
             }
         }
 
@@ -156,11 +156,21 @@
 
         .qr-container .qr-slate-text {
             font-size: 6vw;
-            padding-bottom: 1%;
+        }
+
+        .invert-colors {
+            position: absolute;
+            top: 10px;
+            left: 10px;
         }
     </style>
 </head>
 <body>
+
+    <div class="invert-colors">
+        <input type="checkbox" id="invertColors" onchange="toggleColors()">
+        <label for="invertColors">Invert Colors</label>
+    </div>
 
     <div class="container" id="inputContainer">
         <h1>Onset Data</h1>
@@ -226,8 +236,8 @@
 
     <div class="container qr-container" id="qrContainer" style="display: none;">
         <div id="qrCode">
-            <p class="output-text qr-slate-text slate-color">Slate: <span id="qrCodeSlate"></span></p>
             <canvas id="qrCodeImg"></canvas>
+            <p class="output-text qr-slate-text slate-color">Slate: <span id="qrCodeSlate"></span></p>
             <p class="output-text">Version: <span id="currentState"></span></p>
             <div id="qrCodeDetails">
                 <p class="output-text scene-color">Scene: <span id="qrCodeScriptLocation"></span></p>
@@ -317,6 +327,23 @@
             document.getElementById('qrContainer').style.display = 'none';
             document.getElementById('warningMessage').style.display = 'none';
             document.getElementById('versionInput').value = '';
+        }
+
+        function toggleColors() {
+            const isChecked = document.getElementById('invertColors').checked;
+            if (isChecked) {
+                document.body.style.backgroundColor = 'white';
+                document.body.style.color = 'black';
+                document.querySelectorAll('*').forEach(el => {
+                    el.style.color = 'black';
+                });
+            } else {
+                document.body.style.backgroundColor = 'black';
+                document.body.style.color = 'white';
+                document.querySelectorAll('*').forEach(el => {
+                    el.style.color = '';
+                });
+            }
         }
     </script>
 
