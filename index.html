@@ -80,6 +80,11 @@
             cursor: pointer;
         }
 
+        .button.inverted {
+            background-color: black;
+            color: white;
+        }
+
         .warning {
             color: red;
             margin-top: 10px;
@@ -186,28 +191,33 @@
             <div class="input-row">
                 <div>
                     <div class="input-label scene-color">Scene</div>
-                    <input type="text" id="sceneInput" placeholder="Scene">
+                    <input type="text" id="sceneInput" placeholder="Scene" list="sceneInputList">
+                    <datalist id="sceneInputList"></datalist>
                 </div>
                 <div>
                     <div class="input-label slate-color">Slate</div>
-                    <input type="text" id="slateInput" placeholder="Slate">
+                    <input type="text" id="slateInput" placeholder="Slate" list="slateInputList">
+                    <datalist id="slateInputList"></datalist>
                 </div>
             </div>
             <div class="input-row">
                 <div>
                     <div class="input-label shootday-color">Shoot Day</div>
-                    <input type="text" id="shootDayInput" placeholder="Shoot Day">
+                    <input type="text" id="shootDayInput" placeholder="Shoot Day" list="shootDayInputList">
+                    <datalist id="shootDayInputList"></datalist>
                 </div>
                 <div>
                     <div class="input-label location-color">Location</div>
-                    <input type="text" id="locationInput" placeholder="Location">
+                    <input type="text" id="locationInput" placeholder="Location" list="locationInputList">
+                    <datalist id="locationInputList"></datalist>
                 </div>
             </div>
         </div>
         <div id="assetInput" style="display: none;">
             <div class="input-row">
                 <div class="input-label asset-color">Asset Name/Ref Name</div>
-                <input type="text" id="assetNameInput" placeholder="Asset Name/Ref Name">
+                <input type="text" id="assetNameInput" placeholder="Asset Name/Ref Name" list="assetNameInputList">
+                <datalist id="assetNameInputList"></datalist>
             </div>
         </div>
         <div id="unitSelection">
@@ -318,15 +328,6 @@
                 console.log('QR code generated!');
             });
 
-            const versionText = {
-                '1': 'Slate Ref',
-                '2': 'Set Ref',
-                '3': 'Texture Ref',
-                '4': 'Photogrammetry',
-                '5': 'HDRI'
-            };
-
-            document.getElementById('currentState').textContent = versionText[version];
             document.getElementById('inputContainer').style.display = 'none';
             document.getElementById('qrContainer').style.display = 'block';
         }
@@ -351,6 +352,7 @@
                 document.querySelectorAll('*').forEach(el => {
                     el.style.color = 'black';
                 });
+                document.querySelector('.button').classList.add('inverted');
             } else {
                 document.body.style.backgroundColor = 'black';
                 document.body.style.color = 'white';
@@ -362,8 +364,39 @@
                 document.querySelectorAll('*').forEach(el => {
                     el.style.color = '';
                 });
+                document.querySelector('.button').classList.remove('inverted');
             }
         }
+
+        function saveInput(fieldId) {
+            const input = document.getElementById(fieldId).value;
+            if (!input) return;
+
+            let inputs = JSON.parse(localStorage.getItem(fieldId)) || [];
+            if (!inputs.includes(input)) {
+                inputs.unshift(input);
+                if (inputs.length > 5) inputs.pop();
+                localStorage.setItem(fieldId, JSON.stringify(inputs));
+            }
+        }
+
+        function loadInputs(fieldId) {
+            const inputs = JSON.parse(localStorage.getItem(fieldId)) || [];
+            const datalist = document.getElementById(`${fieldId}List`);
+            datalist.innerHTML = '';
+            inputs.forEach(input => {
+                const option = document.createElement('option');
+                option.value = input;
+                datalist.appendChild(option);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            ['sceneInput', 'slateInput', 'shootDayInput', 'locationInput', 'assetNameInput'].forEach(fieldId => {
+                loadInputs(fieldId);
+                document.getElementById(fieldId).addEventListener('blur', () => saveInput(fieldId));
+            });
+        });
     </script>
 
 </body>
