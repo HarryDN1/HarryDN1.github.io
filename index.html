@@ -131,13 +131,13 @@
             }
 
             .qr-slate-text {
-                font-size: 4vw;
+                font-size: 5vw;
                 padding-bottom: 1%;
                 color: #4682b4;
             }
 
             .qr-container .qr-slate-text {
-                font-size: 23vw;
+                font-size: 30vw;
             }
         }
 
@@ -160,8 +160,9 @@
 
         .invert-colors {
             position: absolute;
-            top: 25%;
-            right: 10%;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
         }
     </style>
 </head>
@@ -237,14 +238,27 @@
     <div class="container qr-container" id="qrContainer" style="display: none;">
         <div id="qrCode">
             <canvas id="qrCodeImg"></canvas>
-            <p class="output-text">Version: <span id="currentState"></span></p>
-            <div id="qrCodeDetails">
-                <p class="output-text scene-color">Scene: <span id="qrCodeScriptLocation"></span></p>
-                <p class="output-text location-color">Location: <span id="qrCodeShootLocation"></span></p>
-                <p class="output-text shootday-color">Shoot Day: <span id="qrCodeShootDate"></span></p>
-                <p class="output-text asset-color">Asset Name/Ref Name: <span id="qrCodeAssetName"></span></p>
-            </div>
             <p class="output-text qr-slate-text slate-color">Slate: <span id="qrCodeSlate"></span></p>
+            <div class="input-row">
+                <div>
+                    <div class="input-label scene-color">Scene</div>
+                    <p class="output-text scene-color" id="qrCodeScriptLocation"></p>
+                </div>
+                <div>
+                    <div class="input-label location-color">Location</div>
+                    <p class="output-text location-color" id="qrCodeShootLocation"></p>
+                </div>
+            </div>
+            <div class="input-row">
+                <div>
+                    <div class="input-label shootday-color">Shoot Day</div>
+                    <p class="output-text shootday-color" id="qrCodeShootDate"></p>
+                </div>
+                <div>
+                    <div class="input-label asset-color">Asset Name/Ref Name</div>
+                    <p class="output-text asset-color" id="qrCodeAssetName"></p>
+                </div>
+            </div>
         </div>
         <button class="button" onclick="showInputContainer()">New Input</button>
     </div>
