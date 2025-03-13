@@ -159,22 +159,18 @@
         }
 
         .invert-colors {
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            transform: translateY(-50%);
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
 
-    <div class="invert-colors">
-        <input type="checkbox" id="invertColors" onchange="toggleColors()">
-        <label for="invertColors">Invert Colors</label>
-    </div>
-
     <div class="container" id="inputContainer">
         <h1>Onset Data</h1>
+        <div class="invert-colors">
+            <input type="checkbox" id="invertColors" onchange="toggleColors()">
+            <label for="invertColors">Invert Colors</label>
+        </div>
         <div class="dropdown-title">Version</div>
         <div class="dropdown">
             <select id="versionInput" required onchange="handleVersionChange()">
@@ -331,7 +327,6 @@
             };
 
             document.getElementById('currentState').textContent = versionText[version];
-
             document.getElementById('inputContainer').style.display = 'none';
             document.getElementById('qrContainer').style.display = 'block';
         }
