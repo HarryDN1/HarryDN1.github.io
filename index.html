@@ -136,13 +136,13 @@
             }
 
             .qr-slate-text {
-                font-size: 5vw;
-                padding-bottom: 1%;
+                font-size: 4vw;
+                padding-bottom: 0.5%;
                 color: #4682b4;
             }
 
             .qr-container .qr-slate-text {
-                font-size: 30vw;
+                font-size: 10vw;
             }
         }
 
@@ -156,11 +156,13 @@
         }
 
         .qr-slate-text {
-            font-size: 3vw;
+            font-size: 2vw;
+            margin: 0;
         }
 
         .qr-container .qr-slate-text {
-            font-size: 6vw;
+            font-size: 4vw;
+            margin: 0;
         }
 
         .invert-colors {
@@ -368,20 +370,43 @@
             }
         }
 
+        function setCookie(name, value, days) {
+            const d = new Date();
+            d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+            const expires = "expires=" + d.toUTCString();
+            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        }
+
+        function getCookie(name) {
+            const cname = name + "=";
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(cname) == 0) {
+                    return c.substring(cname.length, c.length);
+                }
+            }
+            return "";
+        }
+
         function saveInput(fieldId) {
             const input = document.getElementById(fieldId).value;
             if (!input) return;
 
-            let inputs = JSON.parse(localStorage.getItem(fieldId)) || [];
+            let inputs = JSON.parse(getCookie(fieldId) || "[]");
             if (!inputs.includes(input)) {
                 inputs.unshift(input);
                 if (inputs.length > 5) inputs.pop();
-                localStorage.setItem(fieldId, JSON.stringify(inputs));
+                setCookie(fieldId, JSON.stringify(inputs), 365);
             }
         }
 
         function loadInputs(fieldId) {
-            const inputs = JSON.parse(localStorage.getItem(fieldId)) || [];
+            const inputs = JSON.parse(getCookie(fieldId) || "[]");
             const datalist = document.getElementById(`${fieldId}List`);
             datalist.innerHTML = '';
             inputs.forEach(input => {
