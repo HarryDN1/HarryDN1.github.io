@@ -136,7 +136,7 @@
             }
 
             .qr-slate-text {
-                font-size: 4vw;
+                font-size: 6.5vw;
                 padding-bottom: 0.5%;
                 color: #4682b4;
             }
@@ -167,6 +167,10 @@
 
         .invert-colors {
             margin-top: 10px;
+        }
+
+        .qr-container .input-row {
+            margin-right: 15px; /* Add spacing between rows */
         }
     </style>
 </head>
@@ -403,6 +407,7 @@
                 if (inputs.length > 5) inputs.pop();
                 setCookie(fieldId, JSON.stringify(inputs), 365);
             }
+            loadInputs(fieldId); // Update the datalist immediately
         }
 
         function loadInputs(fieldId) {
@@ -420,6 +425,7 @@
             ['sceneInput', 'slateInput', 'shootDayInput', 'locationInput', 'assetNameInput'].forEach(fieldId => {
                 loadInputs(fieldId);
                 document.getElementById(fieldId).addEventListener('blur', () => saveInput(fieldId));
+                document.getElementById(fieldId).addEventListener('input', () => loadInputs(fieldId)); // Ensure dropdown is shown on input
             });
         });
     </script>
